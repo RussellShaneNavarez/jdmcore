@@ -78,7 +78,7 @@ const FirebaseProvider = (props) => {
         JSON.stringify(mapEmulators, null, 2)
       );
     }
-
+    // eslint-disable-next-line
     setFirebaseInitializing(false);
   }, [myAuth, myFS, myStorage]);
 
