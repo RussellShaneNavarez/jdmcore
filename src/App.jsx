@@ -1,12 +1,12 @@
 import { AuthProvider } from "./providers/AuthProvider";
 import { FirebaseProvider } from "./providers/FirebaseProvider";
-import { RestOfTheApp } from "./components/RestOfTheApp";
+import { Home } from "./components/Home";
 
 const App = () => {
   return (
     <FirebaseProvider>
       <AuthProvider>
-        <RestOfTheApp />
+        <Home />
       </AuthProvider>
     </FirebaseProvider>
   );
