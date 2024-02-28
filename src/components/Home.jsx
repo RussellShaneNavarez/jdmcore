@@ -1,17 +1,15 @@
-import { useAuthContext } from '../providers/AuthProvider';
-import { Login } from './Login';
+
 import '../styles/Home.css';
 import { Navbar } from './Navbar';
 
 
 
 export const Home = () => {
-  const { profile } = useAuthContext();
   // const { profile, logout } = useAuthContext();
 
-  if (!profile) {
-    return <Login />;
-  } else {
+ // if (!profile) {
+ //   return <Login />;
+ // } else {
     return (
       <div>
         <div className="body">
@@ -42,5 +40,5 @@ export const Home = () => {
       
       
     );
-  }
+  
 };

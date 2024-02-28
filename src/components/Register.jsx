@@ -21,7 +21,10 @@ export const Register = () => {
 
     let success = await register(email, password, theDisplayName);
     setRegistrationRunning(false);
-    if (!success) {
+    if (success) {
+      // Redirect to /home upon successful registration
+      window.location.href = '/home';
+    } else {
       setErrorMessage('Registration failed!');
     }
   };

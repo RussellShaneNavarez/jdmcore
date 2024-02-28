@@ -1,14 +1,31 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./providers/AuthProvider";
 import { FirebaseProvider } from "./providers/FirebaseProvider";
 import { Home } from "./components/Home";
+import About from "./components/About";
+import Contacts from "./components/Contacts";
+import Profile from "./components/Profile";
+import Initial from "./components/Initial";
+import { Login } from "./components/Login";
+import { Register } from "./components/Register";
 
 const App = () => {
   return (
-    <FirebaseProvider>
-      <AuthProvider>
-        <Home />
-      </AuthProvider>
-    </FirebaseProvider>
+    <Router>
+      <FirebaseProvider>
+        <AuthProvider>
+          <Routes>
+            <Route path="/" element={<Initial />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contacts" element={<Contacts />} />
+            <Route path="/profile" element={<Profile />} />
+          </Routes>
+        </AuthProvider>
+      </FirebaseProvider>
+    </Router>
   );
 };
 

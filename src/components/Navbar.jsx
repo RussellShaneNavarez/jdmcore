@@ -1,17 +1,31 @@
-import '../styles/Navbar.css';
+import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useEffect, useRef, useState} from 'react';
+import { useAuthContext } from '../providers/AuthProvider';
+
+import '../styles/Navbar.css';
 
 library.add(faBars); // Add icons to the library
 
 export const Navbar = () => {
+  const { profile, logout } = useAuthContext(); // Get the user profile and logout function from AuthProvider
+
+  const handleLogout = async () => {
+    try {
+      await logout(); // Call the logout function
+      window.location.href = '/login'; // Redirect to the login page
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  };
 
   const dropDownMenuRef = useRef(null);
   const [buttonClicked, setButtonClicked] = useState(false);
   const toggleBtnRef = useRef(null);
 
+  // useEffect for dropdownmenu
   useEffect(() => {
     const toggleBtn = toggleBtnRef.current;
     const dropDownMenu = dropDownMenuRef.current;
@@ -34,37 +48,47 @@ export const Navbar = () => {
     }
   }, [buttonClicked]); // Re-run effect when buttonClicked state changes
 
-  
-
-    return (
-        <div className="navbar">
-          <div className="sub-navbar">
-            <div className="logo"><img src={require('../assets/img/logo.png')} /></div>
-            <ul className='links'>
-              <li><a href='#'>Home</a></li>
-              <li><a href='#'>About</a></li>
-              <li><a href='#'>Services</a></li>
-              <li><a href='#'>Contact</a></li>
-            </ul>
-
-
-            {/* Fare il controllo se l'utente è loggato o meno */}
-            <a href="#" className="action_btn">Login</a>
-
-            
-            <div ref={toggleBtnRef} className='toggle_btn'>
-              <FontAwesomeIcon icon="bars" />
-            </div>
-          </div>
-
-
-          <div ref={dropDownMenuRef} className="dropdown_menu">
-            <li><a href='#'>Home</a></li>
-            <li><a href='#'>About</a></li>
-            <li><a href='#'>Services</a></li>
-            <li><a href='#'>Contact</a></li>
-            <li><a href="#" className="action_btn">Login</a></li>
-          </div>
+  return (
+    <div className="navbar">
+      <div className="sub-navbar">
+        <div className="logo">
+          <img src={require('../assets/img/logo.png')} alt="Logo" />
         </div>
-    );
-  };
+        <ul className='links'>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/about">About</Link></li>
+          <li><Link to="/contact">Contact</Link></li>
+          <li><Link to="/profile">Profile</Link></li>
+        </ul>
+
+        {/* Display Login button if user is not logged in, otherwise display Logout button */}
+        {profile ? (
+          <button className="action_btn" onClick={handleLogout}>Logout</button>
+        ) : (
+          <Link to="/login" className="action_btn">Sign In</Link>
+        )}
+
+
+        <div ref={toggleBtnRef} className='toggle_btn'>
+          <FontAwesomeIcon icon="bars" />
+        </div>
+      </div>
+
+      <div ref={dropDownMenuRef} className="dropdown_menu">
+        <ul>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/about">About</Link></li>
+          <li><Link to="/contact">Contact</Link></li>
+          <li><Link to="/profile">Profile</Link></li>
+          <li>{/* Display Login button if user is not logged in, otherwise display Logout button */}
+        {profile ? (
+          <button className="action_btn" onClick={handleLogout}>Logout</button>
+        ) : (
+          <Link to="/login" className="action_btn">Sign In</Link>
+        )}
+</li>
+        </ul>
+      </div>
+    </div>
+  );
+};

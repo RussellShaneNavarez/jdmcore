@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useAuthContext } from '../providers/AuthProvider';
 import { Register } from './Register';
+import { Link } from 'react-router-dom';
 
 export const Login = () => {
   const { login, authErrorMessages } = useAuthContext();
@@ -16,8 +17,11 @@ export const Login = () => {
     setLoginRunning(true);
     let success = await login(email, password);
     setLoginRunning(false);
-    if (!success) {
-      setErrorMessage('Registration failed!');
+    if (success) {
+      // Redirect to /home upon successful login
+      window.location.href = '/home';
+    } else {
+      setErrorMessage('Login failed!');
     }
   };
 
@@ -100,6 +104,9 @@ export const Login = () => {
       <br />
       <br />
       <button onClick={toggleShowRegisterScreen}>Register New Account</button>
+      <Link to="/home">
+          <button>Home</button>
+        </Link>
     </div>
   );
 };
