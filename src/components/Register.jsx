@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useAuthContext } from '../providers/AuthProvider';
+import { Link } from 'react-router-dom';
 
 export const Register = () => {
   const { register, authErrorMessages } = useAuthContext();
@@ -101,6 +102,9 @@ export const Register = () => {
           </tr>
         </tbody>
       </table>
+      <Link to="/home">
+          <button>Home</button>
+        </Link>
     </div>
   );
 };
