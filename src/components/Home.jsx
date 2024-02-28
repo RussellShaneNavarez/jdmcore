@@ -1,15 +1,7 @@
-
 import '../styles/Home.css';
 import { Navbar } from './Navbar';
 
-
-
 export const Home = () => {
-  // const { profile, logout } = useAuthContext();
-
- // if (!profile) {
- //   return <Login />;
- // } else {
     return (
       <div>
         <div className="body">

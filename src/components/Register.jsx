@@ -24,7 +24,7 @@ export const Register = () => {
     setRegistrationRunning(false);
     if (success) {
       // Redirect to /home upon successful registration
-      window.location.href = '/home';
+      window.location.href = '/';
     } else {
       setErrorMessage('Registration failed!');
     }
@@ -102,7 +102,7 @@ export const Register = () => {
           </tr>
         </tbody>
       </table>
-      <Link to="/home">
+      <Link to="/">
           <button>Home</button>
         </Link>
     </div>

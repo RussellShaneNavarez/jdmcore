@@ -19,7 +19,7 @@ export const Login = () => {
     setLoginRunning(false);
     if (success) {
       // Redirect to /home upon successful login
-      window.location.href = '/home';
+      window.location.href = '/';
     } else {
       setErrorMessage('Login failed!');
     }
@@ -104,7 +104,7 @@ export const Login = () => {
       <br />
       <br />
       <button onClick={toggleShowRegisterScreen}>Register New Account</button>
-      <Link to="/home">
+      <Link to="/">
           <button>Home</button>
         </Link>
     </div>

@@ -57,7 +57,7 @@ export const Navbar = () => {
         <ul className='links'>
           <li><Link to="/">Home</Link></li>
           <li><Link to="/about">About</Link></li>
-          <li><Link to="/contact">Contact</Link></li>
+          <li><Link to="/contacts">Contact</Link></li>
           <li><Link to="/profile">Profile</Link></li>
         </ul>
 
@@ -78,7 +78,7 @@ export const Navbar = () => {
         <ul>
           <li><Link to="/">Home</Link></li>
           <li><Link to="/about">About</Link></li>
-          <li><Link to="/contact">Contact</Link></li>
+          <li><Link to="/contacts">Contact</Link></li>
           <li><Link to="/profile">Profile</Link></li>
           <li>{/* Display Login button if user is not logged in, otherwise display Logout button */}
         {profile ? (
