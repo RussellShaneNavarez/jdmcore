@@ -60,6 +60,7 @@ export const Navbar = () => {
           <li><Link to="/about">About</Link></li>
           <li><Link to="/contacts">Contact</Link></li>
           <li><Link to="/profile">Profile</Link></li>
+          <li><Link to="/carform">CarForm</Link></li>
         </ul>
 
         {/* Display Login button if user is not logged in, otherwise display Logout button */}
@@ -82,6 +83,7 @@ export const Navbar = () => {
           <li><Link to="/about">About</Link></li>
           <li><Link to="/contacts">Contact</Link></li>
           <li><Link to="/profile">Profile</Link></li>
+          <li><Link to="/carform">CarForm</Link></li>
           <li>{/* Display Login button if user is not logged in, otherwise display Logout button */}
         {profile ? (
           <button className="action_btn" onClick={handleLogout}>Logout</button>

@@ -8,6 +8,7 @@ import Profile from "./pages/Profile";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 import Cars from "./pages/Cars";
+import CarForm from "./pages/CarForm";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
             <Route path="/about" element={<About />} />
             <Route path="/contacts" element={<Contacts />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/carform" element={<CarForm />} />
           </Routes>
         </AuthProvider>
       </FirebaseProvider>
