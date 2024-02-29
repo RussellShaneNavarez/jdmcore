@@ -1,10 +1,21 @@
 import '../styles/Home.css';
-import { Navbar } from './Navbar';
+import { Navbar } from '../components/Navbar';
+import { useRef } from 'react';
 
 export const Home = () => {
+
+  // variable scrollUp with useRef()
+  const scrollUp = useRef();
+
+  // function scrollHandler
+  const scrollHandler = (elmRef) => {
+    console.log(elmRef.current);
+    window.scrollTo({ top: elmRef.current.offsetTop, behavior: "smooth" });
+  };
+
     return (
       <div>
-        <div className="body">
+        <div className="body" ref={scrollUp}>
           <header>
             <Navbar></Navbar>
             {/* <div >your email: {profile.email}</div> */}
@@ -27,6 +38,13 @@ export const Home = () => {
 
 
         </div>
+        {/* button scroll up */}
+        <div className="scrollUpDiv">
+          {/*  scrollHandler(nameOfvariable) */}
+            <button onClick={() => scrollHandler(scrollUp)} className="scrollUp">
+             Scroll up
+            </button>
+            </div>
 
       </div>
       

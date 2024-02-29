@@ -20,8 +20,7 @@ const myAuth = getAuth(myApp);
 const myFS = getFirestore(myApp);
 const myStorage = getStorage(myApp);
 
-const FirebaseProvider = (props) => {
-  const { children } = props;
+const FirebaseProvider = ({children}) => {
 
   const [firebaseInitializing, setFirebaseInitializing] = useState(true);
 

@@ -1,12 +1,13 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./providers/AuthProvider";
 import { FirebaseProvider } from "./providers/FirebaseProvider";
-import { Home } from "./components/Home";
-import About from "./components/About";
-import Contacts from "./components/Contacts";
-import Profile from "./components/Profile";
-import { Login } from "./components/Login";
-import { Register } from "./components/Register";
+import { Home } from "./pages/Home";
+import About from "./pages/About";
+import Contacts from "./pages/Contacts";
+import Profile from "./pages/Profile";
+import { Login } from "./pages/Login";
+import { Register } from "./pages/Register";
+import Cars from "./pages/Cars";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/cars" element={<Cars />} />
             <Route path="/about" element={<About />} />
             <Route path="/contacts" element={<Contacts />} />
             <Route path="/profile" element={<Profile />} />

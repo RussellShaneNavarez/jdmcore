@@ -56,6 +56,7 @@ export const Navbar = () => {
         </div>
         <ul className='links'>
           <li><Link to="/">Home</Link></li>
+          <li><Link to="/cars">Cars</Link></li>
           <li><Link to="/about">About</Link></li>
           <li><Link to="/contacts">Contact</Link></li>
           <li><Link to="/profile">Profile</Link></li>
@@ -77,6 +78,7 @@ export const Navbar = () => {
       <div ref={dropDownMenuRef} className="dropdown_menu">
         <ul>
           <li><Link to="/">Home</Link></li>
+          <li><Link to="/cars">Cars</Link></li>
           <li><Link to="/about">About</Link></li>
           <li><Link to="/contacts">Contact</Link></li>
           <li><Link to="/profile">Profile</Link></li>
