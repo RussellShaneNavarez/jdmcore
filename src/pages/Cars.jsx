@@ -3,6 +3,8 @@ import { useFirebaseContext } from '../providers/FirebaseProvider';
 import { collection, getDocs, updateDoc, doc, getDoc } from 'firebase/firestore';
 import { useAuthContext } from '../providers/AuthProvider';
 import Card from '../components/Card'; 
+import { Navbar } from '../components/Navbar';
+import '../styles/Cars.css';
 
 const Cars = () => {
   const { myFS } = useFirebaseContext();
@@ -117,36 +119,38 @@ const Cars = () => {
   const models = [...new Set(cars.map(car => car.model))];
 
   return (
-    <div>
-      <h2>Cars</h2>
-      <div>
-        <select value={selectedBrand} onChange={(e) => setSelectedBrand(e.target.value)}>
-          <option value="">All Brands</option>
-          {brands.map((brand, index) => (
-            <option key={index} value={brand}>{brand}</option>
-          ))}
-        </select>
-        <select value={selectedModel} onChange={(e) => setSelectedModel(e.target.value)}>
-          <option value="">All Models</option>
-          {models.map((model, index) => (
-            <option key={index} value={model}>{model}</option>
-          ))}
-        </select>
-      </div>
-      <input
-        type="text"
-        placeholder="Search by brand or model"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        filteredCars.length === 0 ? (
-          <p>No cars were found.</p>
+    <div className="cars-container"> 
+      <Navbar /> 
+      <div className="cars-content"> 
+        <h2>Cars</h2>
+        <div>
+          <select value={selectedBrand} onChange={(e) => setSelectedBrand(e.target.value)}>
+            <option value="">All Brands</option>
+            {brands.map((brand, index) => (
+              <option key={index} value={brand}>{brand}</option>
+            ))}
+          </select>
+          <select value={selectedModel} onChange={(e) => setSelectedModel(e.target.value)}>
+            <option value="">All Models</option>
+            {models.map((model, index) => (
+              <option key={index} value={model}>{model}</option>
+            ))}
+          </select>
+        </div>
+        <input
+          type="text"
+          placeholder="Search by brand or model"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <div className='card-container'>
+        {loading ? (
+          <p>Loading...</p>
         ) : (
-          <ul>
-            {filteredCars.map(car => (
+          filteredCars.length === 0 ? (
+            <p>No cars were found.</p>
+          ) : (
+            filteredCars.map(car => (
               <Card
                 key={car.id}
                 car={car}
@@ -154,10 +158,11 @@ const Cars = () => {
                 profile={profile}
                 userFavorites={userFavorites}
               />
-            ))}
-          </ul>
-        )
-      )}
+            ))
+          )
+        )}
+        </div>
+      </div>
     </div>
   );
 };

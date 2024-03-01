@@ -29,9 +29,8 @@ a:hover {
 }
 
 .logo img {
-   width: 7rem;
+    width: 7rem;
 }
-
 
 .navbar .links {
     display: flex;
@@ -65,27 +64,25 @@ a:hover {
 }
 
 .action_btn:active {
-    scale: 0.95;
+    transform: scale(0.95);
 }
 
-/* Dropdown menu */
 .dropdown_menu {
     display: none;
     position: absolute;
     right: 2rem;
     top: 60px;
     height: 0;
-    width: 300px;
-    background-color: rgba(255,255,255, 0.1);
+    width: 18rem;
+    background-color: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(15px);
-    border-radius: 10px;
+    border-radius: 0.5rem;
     overflow: hidden;
     transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-
 .dropdown_menu.open {
-    height: 240px;
+    height: 9rem;
 }
 
 .dropdown_menu li {
@@ -95,16 +92,13 @@ a:hover {
     justify-content: center;
 }
 
-
 .dropdown_menu .action_btn {
     width: 100%;
     display: flex;
     justify-content: center;
 }
 
-
-/* Responsive Design */
-@media(max-width: 992px) {
+@media (max-width: 62em) {
     .navbar .links,
     .navbar .action_btn {
         display: none;
@@ -121,5 +115,4 @@ a:hover {
     .sub-navbar {
         width: 80%;
     }
-
 }
