@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
-import '../styles/Card.css'; // Import CSS file for styling
+import '../styles/Card.css';
 
 const Card = ({ car, toggleFavorite, profile, userFavorites }) => {
   const { id, brand, model, year, description, maxPower, maxSpeed, acceleration, price, story, imgUrl } = car;
 
   return (
-    <div key={id} className="card"> {/* Use div instead of li */}
-      <img src={imgUrl} alt={`${brand} ${model}`} className="car-image" /> {/* Apply class name for image */}
-      <div className="card-details"> {/* Wrapper div for card details */}
+    <div key={id} className="card"> 
+      <img src={imgUrl} alt={`${brand} ${model}`} className="car-image" /> 
+      <div className="card-details"> 
         <strong>{brand} {model}</strong> - {year}<br />
         <strong>Description:</strong> {description}<br />
         <strong>Max Power:</strong> {maxPower} hp<br />
