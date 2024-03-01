@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useFirebaseContext } from '../providers/FirebaseProvider';
 import { collection, getDocs, updateDoc, doc, getDoc } from 'firebase/firestore';
-import { Link } from 'react-router-dom';
 import { useAuthContext } from '../providers/AuthProvider';
+import Card from '../components/Card';
 
 const Cars = () => {
   const { myFS } = useFirebaseContext();
@@ -92,33 +92,13 @@ const Cars = () => {
       ) : (
         <ul>
           {cars.map(car => (
-            <li key={car.id}>
-              <strong>{car.brand} {car.model}</strong> - {car.year}<br />
-              <strong>Description:</strong> {car.description}<br />
-              <strong>Max Power:</strong> {car.maxPower} hp<br />
-              <strong>Max Speed:</strong> {car.maxSpeed} km/h<br />
-              <strong>Acceleration:</strong> {car.acceleration} sec (0-100 km/h)<br />
-              <strong>Price:</strong> ${car.price}<br />
-              <strong>Story:</strong> {car.story}<br />
-              <strong>Favorites:</strong>
-              {profile && ( // Check if user profile exists 
-                <button onClick={() => toggleFavorite(car.id)}>
-                  {userFavorites.includes(car.id) ? 'Remove from Favorites' : 'Add to Favorites'}
-                </button>
-              )}
-              {!profile && ( // Check if user profile does not exist
-                <div>
-                  <p>Please sign in or register to add favorites</p>
-                  <button>
-                    <Link to="/login" className="button">Login</Link>
-                  </button>
-                  <button>
-                    <Link to="/register" className="button">Register</Link>
-                  </button>
-                </div>
-              )}
-              <br />
-            </li>
+            <Card
+              key={car.id}
+              car={car}
+              toggleFavorite={toggleFavorite}
+              profile={profile}
+              userFavorites={userFavorites}
+            />
           ))}
         </ul>
       )}
