@@ -1,24 +1,25 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useFirebaseContext } from '../providers/FirebaseProvider';
 import { collection, getDocs, updateDoc, doc, getDoc } from 'firebase/firestore';
 import { useAuthContext } from '../providers/AuthProvider';
-import Card from '../components/Card'; 
+import Card from '../components/Card';
 import { Navbar } from '../components/Navbar';
 import '../styles/Cars.css';
 
 const Cars = () => {
   const { myFS } = useFirebaseContext();
-  const { profile } = useAuthContext(); 
+  const { profile } = useAuthContext();
   const [cars, setCars] = useState([]);
-  const [filteredCars, setFilteredCars] = useState([]); 
+  const [filteredCars, setFilteredCars] = useState([]);
   const [loading, setLoading] = useState(true);
   const [userFavorites, setUserFavorites] = useState([]);
-  const [searchTerm, setSearchTerm] = useState(''); 
-  const [selectedBrand, setSelectedBrand] = useState(''); 
-  const [selectedModel, setSelectedModel] = useState(''); 
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedBrand, setSelectedBrand] = useState('');
+  const [selectedModel, setSelectedModel] = useState('');
 
+  // Effettua la lettura iniziale delle auto e dei preferiti dell'utente
   useEffect(() => {
-    const fetchCars = async () => {
+    const fetchInitialData = async () => {
       try {
         const carsCollectionRef = collection(myFS, 'Cars');
         const carsSnapshot = await getDocs(carsCollectionRef);
@@ -28,19 +29,12 @@ const Cars = () => {
         }));
         setCars(fetchedCars);
         setLoading(false);
-      } catch (error) {
-        console.error('Error fetching cars:', error);
-        setLoading(false);
-      }
-    };
 
-    const fetchUserFavorites = async () => {
-      try {
-        if (profile) { 
-          const userId = profile.uid; // Prende il campo uid dello User
+        if (profile) {
+          const userId = profile.uid;
           const userFavoritesDocRef = doc(collection(myFS, 'Users'), userId);
           const userFavoritesDocSnapshot = await getDoc(userFavoritesDocRef);
-    
+
           if (userFavoritesDocSnapshot.exists()) {
             setUserFavorites(userFavoritesDocSnapshot.data().favorites || []);
           } else {
@@ -48,66 +42,23 @@ const Cars = () => {
           }
         }
       } catch (error) {
-        console.error('Error fetching user favorites:', error);
+        console.error('Error fetching data:', error);
+        setLoading(false);
       }
     };
 
-    fetchCars();
-    fetchUserFavorites();
+    fetchInitialData();
   }, [myFS, profile]);
 
-  
-  // Object click
-  const handleObjectClick = async (objectId) => {
-    try {
-      // Fetch object data from Firestore
-      const objectRef = doc(collection(myFS, 'Cars'), objectId);
-      const objectSnapshot = await getDoc(objectRef);
-
-      if (objectSnapshot.exists) {
-        // Navigate to SelectedObjectPage with object data
-        window.location.href = `/details/${objectId}`; // Use window.location.href to navigate
-      } else {
-        console.log('Object does not exist');
-      }
-    } catch (error) {
-      console.error('Error fetching object:', error);
-    }
-  };
-
-  // Filter cars based on the search term, selected brand, and selected model
-  useEffect(() => {
-    let filtered = cars;
-  
-    // Function to check if a car matches the search term
-    const carMatchesSearch = (car, searchTerm) => {
-      const searchWords = searchTerm.toLowerCase().split(/\s+/); // Split search term by spaces
-      return searchWords.every(word =>
-        car.brand.toLowerCase().includes(word) || car.model.toLowerCase().includes(word)
-      );
-    };
-  
-    if (selectedBrand) {
-      filtered = filtered.filter(car => car.brand === selectedBrand);
-    }
-    if (selectedModel) {
-      filtered = filtered.filter(car => car.model === selectedModel);
-    }
-    if (searchTerm) {
-      filtered = filtered.filter(car => carMatchesSearch(car, searchTerm));
-    }
-    setFilteredCars(filtered);
-  }, [cars, searchTerm, selectedBrand, selectedModel]);
-
+  // Gestisce il toggle dei preferiti
   const toggleFavorite = async (id) => {
     try {
-      if (!profile) { 
+      if (!profile) {
         return;
       }
 
-      const userId = profile.uid; 
+      const userId = profile.uid;
       const userDocRef = doc(collection(myFS, 'Users'), userId);
-
       const userDocSnapshot = await getDoc(userDocRef);
       const currentFavorites = userDocSnapshot.data().favorites || [];
 
@@ -133,14 +84,38 @@ const Cars = () => {
     }
   };
 
-  // Get unique brands and models for dropdown options
-  const brands = [...new Set(cars.map(car => car.brand))];
-  const models = [...new Set(cars.map(car => car.model))];
+  // Filtra le auto in base al termine di ricerca, brand e modello selezionati
+  useEffect(() => {
+    const filtered = cars.filter(car => {
+      const brandMatches = !selectedBrand || car.brand === selectedBrand;
+      const modelMatches = !selectedModel || car.model === selectedModel;
+      const searchTermMatches = !searchTerm ||
+        searchTerm
+          .toLowerCase()
+          .split(/\s+/) // Dividi la stringa di ricerca in parole
+          .every(word =>
+            car.brand.toLowerCase().includes(word) ||
+            car.model.toLowerCase().includes(word)
+          );
+      return brandMatches && modelMatches && searchTermMatches;
+    });
+    setFilteredCars(filtered);
+  }, [cars, searchTerm, selectedBrand, selectedModel]);
+
+  const handleObjectClick = (objectId) => {
+    // Redirect to the details page of the selected car
+    window.location.href = `/details/${objectId}`;
+  };
+  
+
+  // Ottiene i brand e i modelli unici per le opzioni del menu a tendina
+  const brands = useMemo(() => [...new Set(cars.map(car => car.brand))], [cars]);
+  const models = useMemo(() => [...new Set(cars.map(car => car.model))], [cars]);
 
   return (
-    <div className="cars-container"> 
-      <Navbar /> 
-      <div className="cars-content"> 
+    <div className="cars-container">
+      <Navbar />
+      <div className="cars-content">
         <h2>Cars</h2>
         <div>
           <select value={selectedBrand} onChange={(e) => setSelectedBrand(e.target.value)}>
@@ -170,19 +145,18 @@ const Cars = () => {
               <p>No cars were found.</p>
             ) : (
               filteredCars.map(car => (
-              <div key={car.id}  onClick={() => handleObjectClick(car.id)}>
-                <Card
-                  car={car}
-                  toggleFavorite={toggleFavorite}
-                  profile={profile}
-                  userFavorites={userFavorites}
-                />
-              </div>
-            
+                <div key={car.id} onClick={() => handleObjectClick(car.id)}>
+                  <Card
+                    car={car}
+                    toggleFavorite={toggleFavorite}
+                    profile={profile}
+                    userFavorites={userFavorites}
+                  />
+                </div>
               ))
             )
-        )}
-      </div>
+          )}
+        </div>
       </div>
     </div>
   );
