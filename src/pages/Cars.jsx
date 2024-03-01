@@ -56,6 +56,25 @@ const Cars = () => {
     fetchUserFavorites();
   }, [myFS, profile]);
 
+  
+  // Object click
+  const handleObjectClick = async (objectId) => {
+    try {
+      // Fetch object data from Firestore
+      const objectRef = doc(collection(myFS, 'Cars'), objectId);
+      const objectSnapshot = await getDoc(objectRef);
+
+      if (objectSnapshot.exists) {
+        // Navigate to SelectedObjectPage with object data
+        window.location.href = `/details/${objectId}`; // Use window.location.href to navigate
+      } else {
+        console.log('Object does not exist');
+      }
+    } catch (error) {
+      console.error('Error fetching object:', error);
+    }
+  };
+
   // Filter cars based on the search term, selected brand, and selected model
   useEffect(() => {
     let filtered = cars;
@@ -143,25 +162,27 @@ const Cars = () => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <div className='card-container'>
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
-          filteredCars.length === 0 ? (
-            <p>No cars were found.</p>
+        <div className="card-container">
+          {loading ? (
+            <p>Loading...</p>
           ) : (
-            filteredCars.map(car => (
-              <Card
-                key={car.id}
-                car={car}
-                toggleFavorite={toggleFavorite}
-                profile={profile}
-                userFavorites={userFavorites}
-              />
-            ))
-          )
+            filteredCars.length === 0 ? (
+              <p>No cars were found.</p>
+            ) : (
+              filteredCars.map(car => (
+              <div key={car.id}  onClick={() => handleObjectClick(car.id)}>
+                <Card
+                  car={car}
+                  toggleFavorite={toggleFavorite}
+                  profile={profile}
+                  userFavorites={userFavorites}
+                />
+              </div>
+            
+              ))
+            )
         )}
-        </div>
+      </div>
       </div>
     </div>
   );
