@@ -2,14 +2,18 @@ import { useEffect, useState } from 'react';
 import { useFirebaseContext } from '../providers/FirebaseProvider';
 import { collection, getDocs, updateDoc, doc, getDoc } from 'firebase/firestore';
 import { useAuthContext } from '../providers/AuthProvider';
-import Card from '../components/Card';
+import Card from '../components/Card'; 
 
 const Cars = () => {
   const { myFS } = useFirebaseContext();
   const { profile } = useAuthContext(); 
   const [cars, setCars] = useState([]);
+  const [filteredCars, setFilteredCars] = useState([]); 
   const [loading, setLoading] = useState(true);
   const [userFavorites, setUserFavorites] = useState([]);
+  const [searchTerm, setSearchTerm] = useState(''); 
+  const [selectedBrand, setSelectedBrand] = useState(''); 
+  const [selectedModel, setSelectedModel] = useState(''); 
 
   useEffect(() => {
     const fetchCars = async () => {
@@ -31,7 +35,7 @@ const Cars = () => {
     const fetchUserFavorites = async () => {
       try {
         if (profile) { 
-          const userId = profile.uid; // Prendi uid dalla raccolta 'Users' per il profilo loggato
+          const userId = profile.uid; // Prende il campo uid dello User
           const userFavoritesDocRef = doc(collection(myFS, 'Users'), userId);
           const userFavoritesDocSnapshot = await getDoc(userFavoritesDocRef);
     
@@ -45,62 +49,114 @@ const Cars = () => {
         console.error('Error fetching user favorites:', error);
       }
     };
-    
 
     fetchCars();
     fetchUserFavorites();
   }, [myFS, profile]);
 
+  // Filter cars based on the search term, selected brand, and selected model
+  useEffect(() => {
+    let filtered = cars;
+  
+    // Function to check if a car matches the search term
+    const carMatchesSearch = (car, searchTerm) => {
+      const searchWords = searchTerm.toLowerCase().split(/\s+/); // Split search term by spaces
+      return searchWords.every(word =>
+        car.brand.toLowerCase().includes(word) || car.model.toLowerCase().includes(word)
+      );
+    };
+  
+    if (selectedBrand) {
+      filtered = filtered.filter(car => car.brand === selectedBrand);
+    }
+    if (selectedModel) {
+      filtered = filtered.filter(car => car.model === selectedModel);
+    }
+    if (searchTerm) {
+      filtered = filtered.filter(car => carMatchesSearch(car, searchTerm));
+    }
+    setFilteredCars(filtered);
+  }, [cars, searchTerm, selectedBrand, selectedModel]);
+
   const toggleFavorite = async (id) => {
     try {
-      if (!profile) {
+      if (!profile) { 
         return;
       }
-  
-      const userId = profile.uid;
+
+      const userId = profile.uid; 
       const userDocRef = doc(collection(myFS, 'Users'), userId);
-  
+
       const userDocSnapshot = await getDoc(userDocRef);
-      const userData = userDocSnapshot.data();
-      const currentFavorites = userData.favorites || [];
-  
-      const isFavorite = currentFavorites.includes(id);
-  
-      let updatedFavorites; // Definisci la variabile updatedFavorites
-  
-      if (isFavorite) {
-        updatedFavorites = currentFavorites.filter(favId => favId !== id);
-        await updateDoc(userDocRef, { favorites: updatedFavorites });
+      const currentFavorites = userDocSnapshot.data().favorites || [];
+
+      if (currentFavorites.includes(id)) {
+        await updateDoc(userDocRef, {
+          favorites: currentFavorites.filter(favId => favId !== id)
+        });
       } else {
-        updatedFavorites = [...currentFavorites, id];
-        await updateDoc(userDocRef, { favorites: updatedFavorites });
+        await updateDoc(userDocRef, {
+          favorites: [...currentFavorites, id]
+        });
       }
-  
-      setUserFavorites(updatedFavorites);
+
+      setUserFavorites(prevFavorites => {
+        if (prevFavorites.includes(id)) {
+          return prevFavorites.filter(favId => favId !== id);
+        } else {
+          return [...prevFavorites, id];
+        }
+      });
     } catch (error) {
-      console.error('Errore durante la gestione dei preferiti:', error);
+      console.error('Error toggling favorite:', error);
     }
   };
-  
-  
+
+  // Get unique brands and models for dropdown options
+  const brands = [...new Set(cars.map(car => car.brand))];
+  const models = [...new Set(cars.map(car => car.model))];
 
   return (
     <div>
       <h2>Cars</h2>
+      <div>
+        <select value={selectedBrand} onChange={(e) => setSelectedBrand(e.target.value)}>
+          <option value="">All Brands</option>
+          {brands.map((brand, index) => (
+            <option key={index} value={brand}>{brand}</option>
+          ))}
+        </select>
+        <select value={selectedModel} onChange={(e) => setSelectedModel(e.target.value)}>
+          <option value="">All Models</option>
+          {models.map((model, index) => (
+            <option key={index} value={model}>{model}</option>
+          ))}
+        </select>
+      </div>
+      <input
+        type="text"
+        placeholder="Search by brand or model"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <ul>
-          {cars.map(car => (
-            <Card
-              key={car.id}
-              car={car}
-              toggleFavorite={toggleFavorite}
-              profile={profile}
-              userFavorites={userFavorites}
-            />
-          ))}
-        </ul>
+        filteredCars.length === 0 ? (
+          <p>No cars were found.</p>
+        ) : (
+          <ul>
+            {filteredCars.map(car => (
+              <Card
+                key={car.id}
+                car={car}
+                toggleFavorite={toggleFavorite}
+                profile={profile}
+                userFavorites={userFavorites}
+              />
+            ))}
+          </ul>
+        )
       )}
     </div>
   );
