@@ -50,7 +50,29 @@ const Cars = () => {
     fetchInitialData();
   }, [myFS, profile]);
 
-  // Gestisce il toggle dei preferiti
+  // Filtra le auto in base al termine di ricerca, brand e modello selezionati
+  useEffect(() => {
+    const filtered = cars.filter(car => {
+      const brandMatches = !selectedBrand || car.brand === selectedBrand;
+      const modelMatches = !selectedModel || car.model === selectedModel;
+      const searchTermMatches = !searchTerm ||
+        searchTerm
+          .toLowerCase()
+          .split(/\s+/) // Dividi la stringa di ricerca in parole
+          .every(word =>
+            car.brand.toLowerCase().includes(word) ||
+            car.model.toLowerCase().includes(word)
+          );
+      return brandMatches && modelMatches && searchTermMatches;
+    });
+    setFilteredCars(filtered);
+  }, [cars, searchTerm, selectedBrand, selectedModel]);
+
+  // Ottiene i brand e i modelli unici per le opzioni del menu a tendina
+  const brands = useMemo(() => [...new Set(cars.map(car => car.brand))], [cars]);
+  const models = useMemo(() => [...new Set(cars.map(car => car.model))], [cars]);
+
+  // Toggle favorite function
   const toggleFavorite = async (id) => {
     try {
       if (!profile) {
@@ -83,34 +105,6 @@ const Cars = () => {
       console.error('Error toggling favorite:', error);
     }
   };
-
-  // Filtra le auto in base al termine di ricerca, brand e modello selezionati
-  useEffect(() => {
-    const filtered = cars.filter(car => {
-      const brandMatches = !selectedBrand || car.brand === selectedBrand;
-      const modelMatches = !selectedModel || car.model === selectedModel;
-      const searchTermMatches = !searchTerm ||
-        searchTerm
-          .toLowerCase()
-          .split(/\s+/) // Dividi la stringa di ricerca in parole
-          .every(word =>
-            car.brand.toLowerCase().includes(word) ||
-            car.model.toLowerCase().includes(word)
-          );
-      return brandMatches && modelMatches && searchTermMatches;
-    });
-    setFilteredCars(filtered);
-  }, [cars, searchTerm, selectedBrand, selectedModel]);
-
-  const handleObjectClick = (objectId) => {
-    // Redirect to the details page of the selected car
-    window.location.href = `/details/${objectId}`;
-  };
-  
-
-  // Ottiene i brand e i modelli unici per le opzioni del menu a tendina
-  const brands = useMemo(() => [...new Set(cars.map(car => car.brand))], [cars]);
-  const models = useMemo(() => [...new Set(cars.map(car => car.model))], [cars]);
 
   return (
     <div className="cars-container">
@@ -145,14 +139,14 @@ const Cars = () => {
               <p>No cars were found.</p>
             ) : (
               filteredCars.map(car => (
-                <div key={car.id} onClick={() => handleObjectClick(car.id)}>
-                  <Card
-                    car={car}
-                    toggleFavorite={toggleFavorite}
-                    profile={profile}
-                    userFavorites={userFavorites}
-                  />
-                </div>
+                <div key={car.id}>
+                 <Card
+                  car={car}
+                  toggleFavorite={toggleFavorite}
+                  profile={profile}
+                  userFavorites={userFavorites}
+                />
+              </div>
               ))
             )
           )}

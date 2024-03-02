@@ -1,12 +1,17 @@
 import { Link } from 'react-router-dom';
 import '../styles/Card.css';
 
+const redirectToDetails = (objectId) => {
+  // Redirect to the details page of the selected car
+  window.location.href = `/details/${objectId}`;
+};
+
 const Card = ({ car, toggleFavorite, profile, userFavorites }) => {
   const { id, brand, model, year, description, maxPower, maxSpeed, acceleration, price, story, imgUrl } = car;
 
   return (
     <div key={id} className="card"> 
-      <img src={imgUrl} alt={`${brand} ${model}`} className="car-image" /> 
+      <img src={imgUrl} alt={`${brand} ${model}`} className="car-image" onClick={() => redirectToDetails(id)} /> {/* Attach the onClick event */}
       <div className="card-details"> 
         <strong>{brand} {model}</strong> - {year}<br />
         <strong>Description:</strong> {description}<br />
