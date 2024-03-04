@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import { useAuthContext } from '../providers/AuthProvider';
 import { Link } from 'react-router-dom';
+import '../styles/Register.css';
+import backgroundVideo from '../assets/vid/jdmbg.mp4';
 
 export const Register = () => {
   const { register, authErrorMessages } = useAuthContext();
 
-  const [displayName, setDisplayName] = useState(''); // input field value cannot be null
-  const [email, setEmail] = useState(''); // input field value cannot be null
-  const [password, setPassword] = useState(''); // input field value cannot be null
+  const [username, setUsername] = useState(''); 
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState(''); 
 
   const [registrationRunning, setRegistrationRunning] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
@@ -15,15 +17,14 @@ export const Register = () => {
   const handleButtonClick = async () => {
     setRegistrationRunning(true);
 
-    let theDisplayName = displayName;
-    if (theDisplayName?.length <= 0) {
-      theDisplayName = 'NO DISPLAY NAME PROVIDED 😟';
+    let theUsername = username;
+    if (theUsername?.length <= 0) {
+      theUsername = ' ';
     }
 
-    let success = await register(email, password, theDisplayName);
+    let success = await register(email, password, theUsername);
     setRegistrationRunning(false);
     if (success) {
-      // Redirect to /home upon successful registration
       window.location.href = '/';
     } else {
       setErrorMessage('Registration failed!');
@@ -31,26 +32,32 @@ export const Register = () => {
   };
 
   return (
-    <div>
-      <h2>Register New Account</h2>
+    <div className="register-container">
+      <video autoPlay loop muted className="background-video">
+        <source src={backgroundVideo} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      <div className="dim-overlay"></div>
+      <div className="register-form">
+      <h2>Sign Up</h2>
       <table>
         <tbody>
           <tr>
             <td>
-              <label>display name:</label>
+              <label>Username:</label>
             </td>
             <td>
               <input
                 type='text'
-                name='displayName'
-                value={displayName}
-                onChange={(e) => setDisplayName(e.target.value)}
+                name='username'
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
               />
             </td>
           </tr>
           <tr>
             <td>
-              <label>email:</label>
+              <label>Email:</label>
             </td>
             <td>
               <input
@@ -63,7 +70,7 @@ export const Register = () => {
           </tr>
           <tr>
             <td>
-              <label>password:</label>
+              <label>Password:</label>
             </td>
             <td>
               <input
@@ -78,7 +85,7 @@ export const Register = () => {
             {!registrationRunning ? (
               <td colSpan={2} style={{ textAlign: 'center' }}>
                 <button style={{ width: '75%' }} onClick={handleButtonClick}>
-                  Create User
+                  Sign Up
                 </button>
                 {errorMessage && (
                   <>
@@ -102,9 +109,18 @@ export const Register = () => {
           </tr>
         </tbody>
       </table>
-      <Link to="/">
-          <button>Home</button>
-        </Link>
+        <div className='gologin'>
+        <span>Already have an account?</span>
+        <Link to="/login">
+        <p style={{textDecoration:'underline'}}>Sign In</p>
+      </Link>
+        </div>
+        <div className='gohome'>
+        <Link to="/">
+        <span style={{textDecoration:'underline'}}>Skip for now {`>>>`}</span>
+      </Link>
+        </div>
+      </div>
     </div>
   );
 };

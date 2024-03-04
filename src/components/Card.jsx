@@ -11,7 +11,7 @@ const Card = ({ car, toggleFavorite, profile, userFavorites }) => {
 
   return (
     <div key={id} className="card"> 
-      <img src={imgUrl} alt={`${brand} ${model}`} className="car-image" onClick={() => redirectToDetails(id)} /> {/* Attach the onClick event */}
+      <img src={imgUrl} alt={`${brand} ${model}`} className="car-image" onClick={() => redirectToDetails(id)} />
       <div className="card-details"> 
         <strong>{brand} {model}</strong> - {year}<br />
         <strong>Description:</strong> {description}<br />

@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+      position: relative;
+      min-height: 100vh; 
+    }
+    
+    .navbar {
+      position: fixed; 
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    .content {
+      padding: 2em;
+      margin-top: 4em; 
+    }

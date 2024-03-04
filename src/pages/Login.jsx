@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useAuthContext } from '../providers/AuthProvider';
-import { Register } from './Register';
 import { Link } from 'react-router-dom';
+import '../styles/Login.css';
 
 export const Login = () => {
   const { login, authErrorMessages } = useAuthContext();
@@ -11,7 +11,6 @@ export const Login = () => {
 
   const [loginRunning, setLoginRunning] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
-  const [showRegisterForm, setShowRegisterForm] = useState(false);
 
   const handleButtonClick = async () => {
     setLoginRunning(true);
@@ -25,31 +24,14 @@ export const Login = () => {
     }
   };
 
-  const toggleShowRegisterScreen = () => {
-    setShowRegisterForm((currVal) => !currVal);
-  };
-
-  if (showRegisterForm) {
-    return (
-      <div>
-        <Register />
-        <br />
-        <br />
-        <button onClick={toggleShowRegisterScreen}>
-          Sign In To Existing Account
-        </button>
-      </div>
-    );
-  }
-
   return (
     <div>
-      <h2>Sign In To Existing Account</h2>
+      <h2>Sign In</h2>
       <table>
         <tbody>
           <tr>
             <td>
-              <label>email:</label>
+              <label>Email:</label>
             </td>
             <td>
               <input
@@ -62,7 +44,7 @@ export const Login = () => {
           </tr>
           <tr>
             <td>
-              <label>password:</label>
+              <label>Password:</label>
             </td>
             <td>
               <input
@@ -77,7 +59,7 @@ export const Login = () => {
             {!loginRunning ? (
               <td colSpan={2} style={{ textAlign: 'center' }}>
                 <button style={{ width: '75%' }} onClick={handleButtonClick}>
-                  Login
+                  Sign In
                 </button>
                 {(errorMessage || authErrorMessages) && (
                   <>
@@ -103,10 +85,12 @@ export const Login = () => {
       </table>
       <br />
       <br />
-      <button onClick={toggleShowRegisterScreen}>Register New Account</button>
+      <Link to="/register">
+        <button>Sign Up</button>
+      </Link>
       <Link to="/">
-          <button>Home</button>
-        </Link>
+        <button>Home</button>
+      </Link>
     </div>
   );
 };

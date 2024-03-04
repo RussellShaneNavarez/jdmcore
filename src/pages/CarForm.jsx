@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { collection, addDoc } from 'firebase/firestore';
 import { useFirebaseContext } from '../providers/FirebaseProvider';
+import { Navbar } from '../components/Navbar';
+import '../styles/CarForm.css';
 
 function CarForm() {
   const { myFS } = useFirebaseContext(); // Utilizza il valore restituito da useFirebaseContext
@@ -54,8 +56,10 @@ function CarForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
+    <div className="container">
+      <Navbar/>
+    <form onSubmit={handleSubmit} className="content">
+      <div >
         <label>
           Favourites:
           <input type="checkbox" name="favourites" checked={formData.favourites} onChange={handleChange} />
@@ -127,6 +131,7 @@ function CarForm() {
       </div>
       <button type="submit">Submit</button>
     </form>
+    </div>
   );
 }
 
