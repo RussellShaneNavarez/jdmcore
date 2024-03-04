@@ -2,3 +2,88 @@
     margin: 0;
     padding: 0;
 }
+
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.login-form {
+    border: 1px solid black; 
+    padding: 1.25rem; 
+    border-radius: 1rem; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.dim-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); 
+    z-index: -1;
+}
+
+.login-container h2, input, label, button {
+    margin: 1em;
+    padding: 1vh;
+}
+
+.login-container h2 {
+    font-size: 2rem;
+}
+
+.login-container button {
+    font-size: 1em; 
+    padding: 0.6em 1.2em; 
+    background-color: red;
+    border: none; 
+    border-radius: 0.25rem; 
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-container button:hover {
+    background-color: #a60000; 
+}
+
+.login-form input {
+    padding: 0.5rem; 
+    border: 1px solid #ccc; 
+    border-radius: 0.25rem; 
+    transition: border-color 0.3s ease; 
+}
+
+.goregister {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 1em;
+    margin-top: -2em;
+}
+
+.goregister span {
+    margin-right: 0.5em;
+}
+
+.gohome {
+    margin-top: 1em;
+    margin-left: auto; 
+}

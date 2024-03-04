@@ -10,12 +10,12 @@ import '../styles/Navbar.css';
 library.add(faBars); // Add icons to the library
 
 export const Navbar = () => {
-  const { profile, logout } = useAuthContext(); // Get the user profile and logout function from AuthProvider
+  const { profile, logout } = useAuthContext();
 
   const handleLogout = async () => {
     try {
-      await logout(); // Call the logout function
-      window.location.href = '/login'; // Redirect to the login page
+      await logout();
+      window.location.href = '/login';
     } catch (error) {
       console.error('Logout failed:', error);
     }
@@ -25,7 +25,6 @@ export const Navbar = () => {
   const [buttonClicked, setButtonClicked] = useState(false);
   const toggleBtnRef = useRef(null);
 
-  // useEffect for dropdownmenu
   useEffect(() => {
     const toggleBtn = toggleBtnRef.current;
     const dropDownMenu = dropDownMenuRef.current;
@@ -36,7 +35,7 @@ export const Navbar = () => {
       } else {
         dropDownMenu.classList.add('open');
       }
-      setButtonClicked(!buttonClicked); // Toggle the state
+      setButtonClicked(!buttonClicked);
     };
 
     if (toggleBtn) {
@@ -46,7 +45,7 @@ export const Navbar = () => {
         toggleBtn.removeEventListener('click', handleClick);
       };
     }
-  }, [buttonClicked]); // Re-run effect when buttonClicked state changes
+  }, [buttonClicked]);
 
   return (
     <div className="navbar">
@@ -62,15 +61,11 @@ export const Navbar = () => {
           <li><Link to="/profile">Profile</Link></li>
           <li><Link to="/carform">CarForm</Link></li>
         </ul>
-
-        {/* Display Login button if user is not logged in, otherwise display Logout button */}
         {profile ? (
           <button className="action_btn" onClick={handleLogout}>Logout</button>
         ) : (
           <Link to="/login" className="action_btn">Sign In</Link>
         )}
-
-
         <div ref={toggleBtnRef} className='toggle_btn'>
           <FontAwesomeIcon icon="bars" />
         </div>
@@ -85,7 +80,6 @@ export const Navbar = () => {
           <li><Link to="/profile">Profile</Link></li>
           <li><Link to="/carform">CarForm</Link></li>
           <li>
-            {/* Display Login button if user is not logged in, otherwise display Logout button */}
         {profile ? (
           <button className="action_btn" onClick={handleLogout}>Logout</button>
         ) : (

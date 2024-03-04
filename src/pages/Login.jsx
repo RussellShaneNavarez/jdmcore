@@ -2,12 +2,13 @@ import { useState } from 'react';
 import { useAuthContext } from '../providers/AuthProvider';
 import { Link } from 'react-router-dom';
 import '../styles/Login.css';
+import backgroundVideo from '../assets/vid/jdmbg.mp4';
 
 export const Login = () => {
   const { login, authErrorMessages } = useAuthContext();
 
-  const [email, setEmail] = useState(''); // input field value cannot be null
-  const [password, setPassword] = useState(''); // input field value cannot be null
+  const [email, setEmail] = useState(''); 
+  const [password, setPassword] = useState(''); 
 
   const [loginRunning, setLoginRunning] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
@@ -17,7 +18,6 @@ export const Login = () => {
     let success = await login(email, password);
     setLoginRunning(false);
     if (success) {
-      // Redirect to /home upon successful login
       window.location.href = '/';
     } else {
       setErrorMessage('Login failed!');
@@ -25,72 +25,85 @@ export const Login = () => {
   };
 
   return (
-    <div>
+    <div className="login-container">
+      <video autoPlay loop muted className="background-video">
+        <source src={backgroundVideo} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      <div className="dim-overlay"></div>
+      <div className="login-form">
       <h2>Sign In</h2>
-      <table>
-        <tbody>
-          <tr>
-            <td>
-              <label>Email:</label>
-            </td>
-            <td>
-              <input
-                type='text'
-                name='email'
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label>Password:</label>
-            </td>
-            <td>
-              <input
-                type='password'
-                name='password'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </td>
-          </tr>
-          <tr>
-            {!loginRunning ? (
-              <td colSpan={2} style={{ textAlign: 'center' }}>
-                <button style={{ width: '75%' }} onClick={handleButtonClick}>
-                  Sign In
-                </button>
-                {(errorMessage || authErrorMessages) && (
-                  <>
-                    <br />
-                    <h3 style={{ color: 'red' }}>{errorMessage}</h3>
-                    {authErrorMessages?.map((errorLine, idx) => (
-                      <h4 key={`errmsg-${idx}`} style={{ color: 'red' }}>
-                        {errorLine}
-                      </h4>
-                    ))}
-                  </>
-                )}
-              </td>
-            ) : (
+        <table>
+          <tbody>
+            <tr>
               <td>
-                <h6 style={{ color: 'green' }}>
-                  <em>logging in...</em>
-                </h6>
+                <label>Email:</label>
               </td>
-            )}
-          </tr>
-        </tbody>
-      </table>
-      <br />
-      <br />
-      <Link to="/register">
-        <button>Sign Up</button>
-      </Link>
-      <Link to="/">
-        <button>Home</button>
-      </Link>
+              <td>
+                <input
+                  type='text'
+                  name='email'
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label>Password:</label>
+              </td>
+              <td>
+                <input
+                  type='password'
+                  name='password'
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </td>
+            </tr>
+            <tr>
+              {!loginRunning ? (
+                <td colSpan={2} style={{ textAlign: 'center' }}>
+                  <button className="login-button" onClick={handleButtonClick}>
+                    Sign In
+                  </button>
+                  {(errorMessage || authErrorMessages) && (
+                    <>
+                      <br />
+                      <h3 className="error-message">{errorMessage}</h3>
+                      {authErrorMessages?.map((errorLine, idx) => (
+                        <h4 key={`errmsg-${idx}`} className="error-message">
+                          {errorLine}
+                        </h4>
+                      ))}
+                    </>
+                  )}
+                </td>
+              ) : (
+                <td>
+                  <h6 className="success-message">
+                    <em>Logging in...</em>
+                  </h6>
+                </td>
+              )}
+            </tr>
+          </tbody>
+        </table>
+        <br />
+        <br />
+        <div className="goregister">
+        <span>Don{`'`}t have an account?</span>
+          <Link to="/register">
+          <p style={{textDecoration:'underline'}}>Sign Up</p>
+          </Link>
+          </div>
+          <div className='gohome'>
+          <Link to="/">
+          <span style={{textDecoration:'underline'}}>Skip for now {`>>>`}</span>
+          </Link>
+          </div>
+      </div>
     </div>
   );
+  
 };
