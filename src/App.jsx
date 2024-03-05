@@ -25,7 +25,7 @@ const App = () => {
             <Route path="/about" element={<About />} />
             <Route path="/contacts" element={<Contacts />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/carform" element={<CarForm />} />
+            <Route path="/carformonlyadmin" element={<CarForm />} />
             <Route path="/details/:objectId" element={<Details />} />
           </Routes>
         </AuthProvider>

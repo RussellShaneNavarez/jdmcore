@@ -62,7 +62,7 @@ export const Navbar = () => {
           <li><Link to="/about">About</Link></li>
           <li><Link to="/contacts">Contact</Link></li>
           <li><Link to="/profile">Profile</Link></li>
-          {allowedEmails.includes(profile?.email) && <li><Link to="/carform">CarForm</Link></li>}
+          {allowedEmails.includes(profile?.email) && <li><Link to="/carformonlyadmin">CarForm</Link></li>}
         </ul>
         {profile ? (
           <button className="action_btn" onClick={handleLogout}>Logout</button>
@@ -81,7 +81,7 @@ export const Navbar = () => {
           <li><Link to="/about">About</Link></li>
           <li><Link to="/contacts">Contact</Link></li>
           <li><Link to="/profile">Profile</Link></li>
-          {allowedEmails.includes(profile?.email) && <li><Link to="/carform">CarForm</Link></li>}
+          {allowedEmails.includes(profile?.email) && <li><Link to="/carformonlyadmin">CarForm</Link></li>}
           <li>
         {profile ? (
           <button className="action_btn" onClick={handleLogout}>Logout</button>
