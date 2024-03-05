@@ -36,7 +36,7 @@ export const Home = () => {
           <div className="sub-main">
             <h2>Car of the month</h2>
             <hr />
-            <img src={require('../assets/img/monthcar.png')} />
+            <img src={require('../assets/img/car-model.png')} />
             <h3>Nissan Skyline GTR R34</h3>
             <p> (Non fare caso a questo, fa troppo ridere hahaha)</p>
           </div>

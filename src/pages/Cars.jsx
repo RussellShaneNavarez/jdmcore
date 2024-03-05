@@ -110,8 +110,7 @@ const Cars = () => {
     <div className="cars-container">
       <Navbar />
       <div className="cars-content">
-        <h2>Cars</h2>
-        <div>
+        <div className="select-container">
           <select value={selectedBrand} onChange={(e) => setSelectedBrand(e.target.value)}>
             <option value="">All Brands</option>
             {brands.map((brand, index) => (
@@ -125,12 +124,14 @@ const Cars = () => {
             ))}
           </select>
         </div>
-        <input
-          type="text"
-          placeholder="Search by brand or model"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
+        <div className="input-container">
+          <input
+            className='search-input'
+            type="text"
+            placeholder="Search by brand or model"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}/>
+        </div>
         <div className="card-container">
           {loading ? (
             <p>Loading...</p>

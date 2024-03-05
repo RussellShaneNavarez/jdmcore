@@ -6,6 +6,7 @@
 .cars-container {
     position: relative;
     min-height: 100vh; 
+    background-color: #000;
   }
   
   .navbar {
@@ -20,4 +21,51 @@
     padding: 2em;
     margin-top: 4em; 
   }
-  
+
+
+.select-container {
+  width: 30%;
+  margin: auto;
+  justify-content: space-around;
+  text-align: center;
+  align-items: center;
+  display: flex
+}
+
+.select-container select{
+  width: 9rem;
+  border: none;
+  border-radius: 0.2rem;
+  transition: 0.8s;
+  cursor: pointer;
+  height: 2rem;
+  background-color: #cfcfcf;
+  padding: 0.3rem;
+}
+
+.select-container select:hover{
+  background-color: #ffffff;
+
+}
+
+.input-container {
+  width: 35%;
+  margin: auto;
+  justify-content: space-around;
+  text-align: center;
+  align-items: center;
+  display: flex
+}
+
+.search-input {
+  width: 100%;
+  border-radius: 0.2rem;
+  transition: 0.8s;
+  background-color: #cfcfcf;
+  padding: 0.5rem;
+  border: none;
+}
+
+.search-input:hover{
+  background-color: #ffffff;
+}
