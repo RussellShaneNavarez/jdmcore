@@ -51,7 +51,9 @@ export const Navbar = () => {
     <div className="navbar">
       <div className="sub-navbar">
         <div className="logo">
+          <Link to="/">
           <img src={require('../assets/img/logo.png')} alt="Logo" />
+          </Link>
         </div>
         <ul className='links'>
           <li><Link to="/">Home</Link></li>

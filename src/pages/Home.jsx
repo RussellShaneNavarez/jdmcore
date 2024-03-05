@@ -1,6 +1,7 @@
 import '../styles/Home.css';
 import { Navbar } from '../components/Navbar';
 import { useRef } from 'react';
+import backgroundVideo from '../assets/vid/jdmbg.mp4';
 
 export const Home = () => {
 
@@ -16,17 +17,21 @@ export const Home = () => {
     return (
       <div>
         <div className="body" ref={scrollUp}>
+        <div className="video-container">
+          <div className="overlay"></div> 
+             <video autoPlay loop muted className="background-video">
+                <source src={backgroundVideo} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+          <div className="overlay-text">
+            <h1>Welcome to JDM Core</h1>
+            <p>Discover the thrill of JDM culture</p>
+           </div>
           <header>
-            <Navbar></Navbar>
-            {/* <div >your email: {profile.email}</div> */}
+            <Navbar />
           </header>
-          <section id="hero">
-              {/* <h1> Hello, {profile.displayName} </h1> */}
-              {/* <h1>  Hello, {profile.displayName} </h1> */}
-              {/* <button onClick={logout}>Logout</button> */}
-          </section>
         </div>
-
+      </div>
         <div className="main">
           <div className="sub-main">
             <h2>Car of the month</h2>

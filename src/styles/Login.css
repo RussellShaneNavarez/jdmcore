@@ -8,6 +8,8 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
+    position: relative;
+    overflow: hidden;
 }
 
 .login-form {
