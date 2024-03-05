@@ -24,6 +24,9 @@
     background-color: rgba(0, 0, 0, 0.7);
 }
 
+.register-form input[type='password'] {
+    color: black;
+  }
 
 .background-video {
     position: absolute;

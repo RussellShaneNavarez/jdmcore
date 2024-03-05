@@ -23,6 +23,11 @@
     background-color: rgba(0, 0, 0, 0.7);
 }
 
+.login-form input[type='password'] {
+    color: black;
+  }
+
+
 .background-video {
     position: absolute;
     top: 0;
