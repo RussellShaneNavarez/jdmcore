@@ -11,6 +11,7 @@ library.add(faBars); // Add icons to the library
 
 export const Navbar = () => {
   const { profile, logout } = useAuthContext();
+  const allowedEmails = ["russellnavarez18@gmail.com", "christianmitra7@gmail.com"];
 
   const handleLogout = async () => {
     try {
@@ -61,7 +62,7 @@ export const Navbar = () => {
           <li><Link to="/about">About</Link></li>
           <li><Link to="/contacts">Contact</Link></li>
           <li><Link to="/profile">Profile</Link></li>
-          <li><Link to="/carform">CarForm</Link></li>
+          {allowedEmails.includes(profile?.email) && <li><Link to="/carform">CarForm</Link></li>}
         </ul>
         {profile ? (
           <button className="action_btn" onClick={handleLogout}>Logout</button>
@@ -80,7 +81,7 @@ export const Navbar = () => {
           <li><Link to="/about">About</Link></li>
           <li><Link to="/contacts">Contact</Link></li>
           <li><Link to="/profile">Profile</Link></li>
-          <li><Link to="/carform">CarForm</Link></li>
+          {allowedEmails.includes(profile?.email) && <li><Link to="/carform">CarForm</Link></li>}
           <li>
         {profile ? (
           <button className="action_btn" onClick={handleLogout}>Logout</button>
