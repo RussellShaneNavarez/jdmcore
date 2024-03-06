@@ -78,29 +78,24 @@ const Cars = () => {
       if (!profile) {
         return;
       }
-
+  
       const userId = profile.uid;
       const userDocRef = doc(collection(myFS, 'Users'), userId);
       const userDocSnapshot = await getDoc(userDocRef);
       const currentFavorites = userDocSnapshot.data().favorites || [];
-
+  
+      let updatedFavorites;
       if (currentFavorites.includes(id)) {
-        await updateDoc(userDocRef, {
-          favorites: currentFavorites.filter(favId => favId !== id)
-        });
+        updatedFavorites = currentFavorites.filter(favId => favId !== id);
       } else {
-        await updateDoc(userDocRef, {
-          favorites: [...currentFavorites, id]
-        });
+        updatedFavorites = [...currentFavorites, id];
       }
-
-      setUserFavorites(prevFavorites => {
-        if (prevFavorites.includes(id)) {
-          return prevFavorites.filter(favId => favId !== id);
-        } else {
-          return [...prevFavorites, id];
-        }
-      });
+  
+      // Update the user document in Firestore
+      await updateDoc(userDocRef, { favorites: updatedFavorites });
+  
+      // Update the local state
+      setUserFavorites(updatedFavorites);
     } catch (error) {
       console.error('Error toggling favorite:', error);
     }

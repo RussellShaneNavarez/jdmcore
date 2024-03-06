@@ -43,9 +43,9 @@ export const Home = () => {
 
 
         </div>
-        {/* button scroll up */}
+
+        
         <div className="scrollUpDiv">
-          {/*  scrollHandler(nameOfvariable) */}
             <button onClick={() => scrollHandler(scrollUp)} className="scrollUp">
              Scroll up
             </button>

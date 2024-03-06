@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import '../styles/Card.css';
 
 const redirectToDetails = (objectId) => {
-  // Redirect to the details page of the selected car
   window.location.href = `/details/${objectId}`;
 };
 
@@ -12,15 +11,17 @@ const Card = ({ car, toggleFavorite, profile, userFavorites }) => {
   return (
     <div key={id} className="card"> 
       <img src={imgUrl} alt={`${brand} ${model}`} className="car-image" onClick={() => redirectToDetails(id)} />
-      <div className="card-details"> 
-        <strong>{brand} {model}</strong> - {year}<br />
-        <strong>Description:</strong> {description}<br />
-        <strong>Max Power:</strong> {maxPower} hp<br />
-        <strong>Max Speed:</strong> {maxSpeed} km/h<br />
-        <strong>Acceleration:</strong> {acceleration} sec (0-100 km/h)<br />
-        <strong>Price:</strong> ${price}<br />
-        <strong>Story:</strong> {story}<br />
-        <strong>Favorites:</strong>
+      <div className="card-details">
+        <div className="details">
+        <p><strong>{brand} {model}</strong> - {year}</p>
+        <p><strong>Description:</strong> {description}</p>
+        <p><strong>Max Power:</strong> {maxPower} hp</p>
+        <p><strong>Max Speed:</strong> {maxSpeed} km/h</p>
+        <p><strong>Acceleration:</strong> {acceleration} sec (0-100 km/h)</p>
+        <p><strong>Price:</strong> ${price}</p>
+        <p><strong>Story:</strong> {story}</p>
+        </div>
+        <div className='favorite'>
         {profile && ( 
           <button onClick={() => toggleFavorite(id)}>
             {userFavorites.includes(id) ? 'Remove from Favorites' : 'Add to Favorites'}
@@ -37,6 +38,7 @@ const Card = ({ car, toggleFavorite, profile, userFavorites }) => {
             </button>
           </div>
         )}
+        </div>
       </div>
     </div>
   );

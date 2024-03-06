@@ -10,7 +10,7 @@
   }
   
   .navbar {
-    position: fixed; /* Change to fixed positioning */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -68,4 +68,11 @@
 
 .search-input:hover{
   background-color: #ffffff;
+}
+
+.card-container {
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 5%;
+  padding-right: 5%;
 }
