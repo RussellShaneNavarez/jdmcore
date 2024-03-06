@@ -1,0 +1,78 @@
+footer {
+    background-color: #000000;
+    bottom: 0;
+    color: #fff;
+    padding: 50px 0 30px;
+    font-size: 1rem;
+    line-height: 20px;
+}
+
+.row {
+    width: 85%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.col {
+    flex-basis: 22%;
+    padding: 5px;
+
+}
+
+.logo-footer {
+    width: 190px;
+    margin-bottom: 30px;
+}
+
+.col h3 {
+    width: fit-content;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.email-id {
+    width: fit-content;
+    border-bottom: 1px solid rgb(255, 255, 255);
+    margin: 20px 0;
+}
+
+.col ul li {
+    list-style: none;
+    margin-bottom: 12px;
+}
+
+.col ul li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+form {
+    padding-bottom: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #fff;
+    margin-bottom: 50px;
+}
+
+form input {
+    width: 100%;
+    background-color: transparent;
+    color: #fff;
+    border: 0;
+    outline: none;
+}
+
+.social-icons img {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    font-size: 20px;
+    color: #fff;
+    margin-right: 15px;
+    line-height: 40px;
+    margin-top: 1rem;
+}

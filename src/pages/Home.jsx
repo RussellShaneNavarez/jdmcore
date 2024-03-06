@@ -1,5 +1,6 @@
 import '../styles/Home.css';
 import { Navbar } from '../components/Navbar';
+import { Footer } from '../components/Footer';
 import { useRef } from 'react';
 import backgroundVideo from '../assets/vid/jdmbg.mp4';
 
@@ -31,7 +32,7 @@ export const Home = () => {
             <Navbar />
           </header>
         </div>
-      </div>
+        </div>
         <div className="main">
           <div className="sub-main">
             <h2>Car of the month</h2>
@@ -49,10 +50,10 @@ export const Home = () => {
             <button onClick={() => scrollHandler(scrollUp)} className="scrollUp">
              Scroll up
             </button>
-            </div>
-
+        </div>
+      <Footer />      
       </div>
-      
+           
       
     );
   
