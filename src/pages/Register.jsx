@@ -59,6 +59,7 @@ export const Register = () => {
                 name='username'
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
+                onKeyDown={handleEnterKeyPress}
               />
             </td>
           </tr>
@@ -72,6 +73,7 @@ export const Register = () => {
                 name='email'
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                onKeyDown={handleEnterKeyPress}
               />
             </td>
           </tr>

@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, sendPasswordResetEmail, signOut } from 'firebase/auth';
 import { doc, onSnapshot, setDoc, serverTimestamp } from 'firebase/firestore';
 import { useFirebaseContext } from './FirebaseProvider';
 
@@ -120,6 +120,17 @@ const AuthProvider = (props) => {
         }
     };
 
+    const forgotPassword = async (email) => {
+        try {
+            await sendPasswordResetEmail(myAuth, email);
+            console.log('Password reset email sent');
+            return true;
+        } catch (error) {
+            alert(error.message);
+            return false;
+        }
+    };
+
     if (authLoading) {
         return <h1>Loading</h1>;
     }
@@ -130,6 +141,7 @@ const AuthProvider = (props) => {
         login,
         logout,
         register,
+        forgotPassword
     };
 
     return (

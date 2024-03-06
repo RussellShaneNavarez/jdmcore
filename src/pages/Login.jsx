@@ -5,7 +5,7 @@ import '../styles/Login.css';
 import backgroundVideo from '../assets/vid/jdmbg.mp4';
 
 export const Login = () => {
-  const { login, authErrorMessages } = useAuthContext();
+  const { login, authErrorMessages, forgotPassword } = useAuthContext();
 
   const [email, setEmail] = useState(''); 
   const [password, setPassword] = useState(''); 
@@ -31,6 +31,15 @@ export const Login = () => {
     }
   };
 
+  const handleForgotPassword = async () => {
+    try {
+      await forgotPassword(email);
+      setErrorMessage('');
+    } catch (error) {
+      setErrorMessage('');
+    }
+  };
+
   return (
     <div className="login-container">
       <video autoPlay loop muted className="background-video">
@@ -52,6 +61,7 @@ export const Login = () => {
                   name='email'
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  onKeyDown={handleEnterKeyPress}
                 />
               </td>
             </tr>
@@ -72,13 +82,16 @@ export const Login = () => {
             <tr>
               {!loginRunning ? (
                 <td colSpan={2} style={{ textAlign: 'center' }}>
+                  <div className="forgot-password">
+                  <p onClick={handleForgotPassword}>Forgot Password?</p>
+                </div>
                   <button className="login-button" onClick={handleButtonClick}>
                     Sign In
                   </button>
                   {(errorMessage || authErrorMessages) && (
                     <>
                       <br />
-                      <h3 className="error-message">{errorMessage}</h3>
+                      <h3 style={{ color: 'red' }}>{errorMessage}</h3>
                       {authErrorMessages?.map((errorLine, idx) => (
                         <h4 key={`errmsg-${idx}`} className="error-message">
                           {errorLine}
