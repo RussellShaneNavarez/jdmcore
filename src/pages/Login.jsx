@@ -24,6 +24,13 @@ export const Login = () => {
     }
   };
 
+  const handleEnterKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      handleButtonClick();
+    }
+  };
+
   return (
     <div className="login-container">
       <video autoPlay loop muted className="background-video">
@@ -58,6 +65,7 @@ export const Login = () => {
                   name='password'
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  onKeyDown={handleEnterKeyPress}
                 />
               </td>
             </tr>

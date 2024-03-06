@@ -31,6 +31,13 @@ export const Register = () => {
     }
   };
 
+  const handleEnterKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault(); // Prevent default form submission
+      handleButtonClick();
+    }
+  };
+
   return (
     <div className="register-container">
       <video autoPlay loop muted className="background-video">
@@ -78,6 +85,7 @@ export const Register = () => {
                 name='password'
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                onKeyDown={handleEnterKeyPress}
               />
             </td>
           </tr>
