@@ -30,7 +30,7 @@ export const Footer = () => {
                 </div>
                 <div className="col">
                     <h3> Work with us </h3>
-                    <form>
+                    <form className="form-work"> 
                         <input type="email" placeholder="Enter your email..." required></input>
                         <button type="submit"></button>
                     </form>
