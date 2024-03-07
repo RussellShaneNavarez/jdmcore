@@ -4,7 +4,9 @@ import { collection, getDocs, updateDoc, doc, getDoc } from 'firebase/firestore'
 import { useAuthContext } from '../providers/AuthProvider';
 import Card from '../components/Card';
 import { Navbar } from '../components/Navbar';
+import { Footer } from '../components/Footer';
 import '../styles/Cars.css';
+
 
 const Cars = () => {
   const { myFS } = useFirebaseContext();
@@ -148,6 +150,7 @@ const Cars = () => {
           )}
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };

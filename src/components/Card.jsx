@@ -22,22 +22,22 @@ const Card = ({ car, toggleFavorite, profile, userFavorites }) => {
         <p><strong>Story:</strong> {story}</p>
         </div>
         <div className='favorite'>
-        {profile && ( 
-          <button onClick={() => toggleFavorite(id)}>
-            {userFavorites.includes(id) ? 'Remove from Favorites' : 'Add to Favorites'}
-          </button>
-        )}
-        {!profile && ( 
-          <div>
-            <p>Please sign in or register to add favorites</p>
-            <button>
-              <Link to="/login" className="button">Login</Link>
+        {profile !== null && profile !== undefined && ( 
+            <button onClick={() => toggleFavorite(id)}>
+              {userFavorites.includes(id) ? 'Remove from Favorites' : 'Add to Favorites'}
             </button>
-            <button>
-              <Link to="/register" className="button">Register</Link>
-            </button>
-          </div>
-        )}
+          )}
+          {profile === null || profile === undefined && ( 
+            <div>
+              <p>Please sign in or register to add favorites</p>
+              <button>
+                <Link to="/login" className="button">Login</Link>
+              </button>
+              <button>
+                <Link to="/register" className="button">Register</Link>
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>

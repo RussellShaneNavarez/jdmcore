@@ -1,4 +1,5 @@
 import { Navbar } from "../components/Navbar";
+import { Footer } from '../components/Footer';
 import '../styles/Profile.css';
 
 const Profile = () => {
@@ -9,6 +10,7 @@ const Profile = () => {
         <h2>Profile</h2>
         <p>Privacy Bro</p>
         </div>
+        <Footer/>
       </div>
     );
   };

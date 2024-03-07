@@ -1,4 +1,5 @@
 import { Navbar } from "../components/Navbar";
+import { Footer } from '../components/Footer';
 import '../styles/About.css';
 
 const About = () => {
@@ -9,6 +10,7 @@ const About = () => {
         <h2>About Us</h2>
         <p>Welcome to our website! We are a team of developers...</p>
       </div>
+      <Footer/>
     </div>
   );
 };

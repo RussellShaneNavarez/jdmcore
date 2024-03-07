@@ -3,7 +3,7 @@ import '../styles/Footer.css';
 export const Footer = () => {
 
     return(
-        <footer>
+        <footer className='footer'>
             <div className="row">
                 <div className="col">
                     <img src={require('../assets/img/logo.png')} className='logo-footer' />

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { collection, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { useFirebaseContext } from '../providers/FirebaseProvider';
 import { Navbar } from '../components/Navbar';
+import { Footer } from '../components/Footer';
 import '../styles/Details.css';
 
 const Details = ({ profile, userFavorites, setUserFavorites }) => {
@@ -75,11 +76,12 @@ const Details = ({ profile, userFavorites, setUserFavorites }) => {
                     <p>Acceleration: {car.acceleration} sec (0-100 km/h)</p>
                     <p>Price: ${car.price}</p>
                     <p>Story: {car.story}</p>
-                    {profile ? (
+                    {profile && (
                         <button onClick={() => toggleFavorite(objectId)}>
                             {userFavorites.includes(objectId) ? 'Remove from Favorites' : 'Add to Favorites'}
                         </button>
-                    ) : (
+                    )}
+                    {!profile && (
                         <div>
                             <p>Please sign in or register to add favorites</p>
                             <button>
@@ -93,6 +95,7 @@ const Details = ({ profile, userFavorites, setUserFavorites }) => {
                 </div>
             )}
         </div>
+        <Footer/>
         </div>
     );
 };
