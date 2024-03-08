@@ -12,7 +12,7 @@ const Contacts = () => {
   const [userEmail, setUserEmail] = useState('');
   const [message, setMessage] = useState('');
 
-
+  // Check regex email
   const emailValidation = () => {
     const regEx = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
     if(regEx.test(userEmail)) {
@@ -24,6 +24,7 @@ const Contacts = () => {
     }
   }
 
+  // Send form
   const sendEmail = (e) => {
     e.preventDefault();
     emailValidation();
