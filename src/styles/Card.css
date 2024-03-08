@@ -42,7 +42,7 @@
 
   
   .card button {
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     background-color: red; 
     border: none; 
     border-radius: 0.25rem;
@@ -64,6 +64,11 @@
     display: flex;
     justify-content: center;
     text-align: center;
+  }
+
+  .loginregister p{
+    padding-top: 0.5em;
+    font-size: 0.9em;
   }
 
   .details {
