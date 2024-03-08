@@ -11,7 +11,7 @@ library.add(faBars); // Add icons to the library
 
 export const Navbar = () => {
   const { profile, logout } = useAuthContext();
-  const allowedEmails = ["russellnavarez18@gmail.com", "christianmitra7@gmail.com"];
+  const allowedEmails = ["russellnavarez18@gmail.com", "christianmitra7@gmail.com", "jdmcore02@gmail.com"];
 
   const handleLogout = async () => {
     try {
