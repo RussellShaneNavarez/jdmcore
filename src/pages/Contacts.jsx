@@ -4,21 +4,22 @@ import '../styles/Contacts.css';
 import emailjs from '@emailjs/browser';
 import { useRef, useState } from 'react';
 
-
 const Contacts = () => {
-
   const form = useRef();
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [message, setMessage] = useState('');
 
+
   // Check regex email
   const emailValidation = () => {
     const regEx = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
     if(regEx.test(userEmail)) {
-      setMessage('Email is valid');
+      setMessage('Message sent successfully!')
+      return true;
     } else if(!regEx.test(userEmail) && userEmail != '') {
-      setMessage('Email is not valid');
+      setMessage('Please enter a correct email.');
+      return false;
     } else {
       setMessage('')
     }
@@ -27,8 +28,8 @@ const Contacts = () => {
   // Send form
   const sendEmail = (e) => {
     e.preventDefault();
-    emailValidation();
-    emailjs.sendForm('service_5aouvrr', 'template_r1722j7', form.current, {
+    if(emailValidation()) {
+      emailjs.sendForm('service_5aouvrr', 'template_r1722j7', form.current, {
         publicKey: 'K1BA2H9xojXnwq0j4',
       })
       .then(
@@ -41,23 +42,45 @@ const Contacts = () => {
           console.log('FAILED...', error.text);
         },
       );
+    } else {
+      console.log("Not sent");
+    }
+ 
+    
   };
 
 
   return (
-    <div className="container">
+    <div className="container-contacts">
       <Navbar/>
-      <div className="content">
-      <h2>Contact Us</h2>
-      <div className="container-form">
+      <div className="content-contacts">
+        <div className="container-text">
+          <p id="head-text">Send us a message!</p>
+          <p id="sub-text">Got a question or proposal, or just want<br></br>
+          to say hello? Go ahead. </p>
+        </div>
+        <div className="message-box">
+            <p className="message">{message}</p>
+        </div>
+
         <form className="contact-form" ref={form} onSubmit={sendEmail}>
-          <p>Name: <input value={userName} onChange={(e) => setUserName(e.target.value)} type="text" name="user_name" required/> </p>
-          <p>Email: <input value={userEmail} onChange={(e) => setUserEmail(e.target.value)} type="email" name="user_email" required/></p>
-          <p>Message: <textarea name="message" required/></p>
-          <p className="message">{message}</p>
-          <input type="submit" value="Send" />
+          <div className="item-input">
+             <label>Your Name </label>
+             <input value={userName} onChange={(e) => setUserName(e.target.value)} type="text" name="user_name" placeholder="Enter your name" required/>
+          </div>
+          <div className="item-input">
+             <label>Email Address </label>
+             <input  value={userEmail} onChange={(e) => setUserEmail(e.target.value)} type="email" name="user_email" placeholder="Enter your email"required/>
+          </div>
+          <div className="item-input-message">
+            <label>Your Message </label>
+            <textarea  placeholder="Enter your message" name="message" required/>
+          </div>
+ 
+ 
+          <button className="btn-submit" type="submit" value="Send">Send</button>
         </form>
-      </div>
+
       </div>
       <Footer/>
     </div>

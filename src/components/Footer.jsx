@@ -15,8 +15,8 @@ export const Footer = () => {
                 <div className="col">
                     <h3>Contacts</h3>
                     <p> Milan, IT </p>
-                    <p className="email-id"> russell18@gmail.com </p>
-                    <p className="email-id"> christian07@gmail.com </p>
+                    <p className="email-id"> russellnavarez18@gmail.com </p>
+                    <p className="email-id"> christianmitra7@gmail.com </p>
                     <h4> +39 324 892 2189</h4>
                 </div>
                 <div className="col">
