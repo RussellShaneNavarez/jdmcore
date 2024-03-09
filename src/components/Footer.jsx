@@ -7,48 +7,42 @@ export const Footer = () => {
             <div className="row">
                 <div className="col">
                     <img src={require('../assets/img/logo.png')} className='logo-footer' />
-                    <p>
-                        JDM Core, discover the thrill of <br></br>
-                        best japanese cars in history.
-                    </p>
                 </div>
                 <div className="col">
-                    <h3>Contacts</h3>
-                    <p> Milan, IT </p>
-                    <p className="email-id"> russellnavarez18@gmail.com </p>
-                    <p className="email-id"> christianmitra7@gmail.com </p>
-                    <h4> +39 324 892 2189</h4>
-                </div>
-                <div className="col">
-                    <h3>Links</h3>
                     <ul>
-                        <li><a href="">Home</a></li>
-                        <li><a href="">Cars</a></li>
-                        <li><a href="">About Us</a></li>
-                        <li><a href="">Contact</a></li>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/cars">Cars</a></li>
+                        <li><a href="/profile">Profile</a></li>
                     </ul>
                 </div>
                 <div className="col">
-                    <h3> Work with us </h3>
-                    <form className="form-work"> 
-                        <input type="email" placeholder="Enter your email..." required></input>
-                        <button type="submit"></button>
-                    </form>
-                   
+                    <ul>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/contacts">Contact</a></li>
+                    </ul>
+                </div>
+                <div className="col">
                     <div className="social-icons">
                         <p> Chri Socials: </p>
-                        <img src={require('../assets/img/github-logo.png')}></img>
-                        <img src={require('../assets/img/linkedin-icon.png')}></img>
-                        <img src={require('../assets/img/whatsapp-logo.png')}></img>
+                        <a href="https://github.com/chrimitra"><img src={require('../assets/img/github-logo.png')}></img></a>
+                        <a href="https://www.linkedin.com/in/christianmartinmitra/"><img src={require('../assets/img/linkedin-icon.png')}></img></a>
+                        <a href="https://www.instagram.com/chrimitra/"><img src={require('../assets/img/instagram-logo.png')}></img></a>
+                        <a href="mailto:christianmitra7@gmail.com"><img src={require('../assets/img/gmail-logo.png')}></img></a>
                     </div>
                     <br></br>
                     <div className="social-icons">
                         <p> Russell Socials: </p>
-                        <img src={require('../assets/img/github-logo.png')}></img>
-                        <img src={require('../assets/img/linkedin-icon.png')}></img>
-                        <img src={require('../assets/img/whatsapp-logo.png')}></img>
+                        <a href="https://github.com/RussellShaneNavarez"><img src={require('../assets/img/github-logo.png')}></img></a>
+                        <a href="https://www.linkedin.com/in/russell-shane-navarez/"><img src={require('../assets/img/linkedin-icon.png')}></img></a>
+                        <a href="https://www.instagram.com/russnvrz/"><img src={require('../assets/img/instagram-logo.png')}></img></a>
+                        <a href="mailto:russell@gmail.com"><img src={require('../assets/img/gmail-logo.png')}></img></a>
                     </div>
                 </div>
+            </div>
+            <hr className='hr'></hr>
+            <div className="bottom-container">
+                <p>© 2024 Copyright. All rights Reserved.</p>
+                <p> Designed by @chrimitra & @russnvrz. </p>
             </div>
         </footer>
     )
