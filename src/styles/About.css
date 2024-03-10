@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
 }
-  
+
 
 .navbar {
   position: fixed; 
@@ -67,6 +67,10 @@
   justify-content: space-between;
   width: 70%;
   margin: 3rem auto;
+  animation: fade-in 1.5s forwards;
+  background-color: rgaba(#000, 0.25);
+  opacity: 0;
+  transform: translateY(50vh);
 }
 
 .text-box {
@@ -78,6 +82,7 @@
 .col-img img {
   width: 25rem;
   border-radius: 50%;
+
 }
 
 .col-img h1 {
@@ -86,4 +91,18 @@
 
 .col-img p {
   color: white;
+}
+
+@keyframes fade-in {
+  from {
+    background-color: rgaba(#000, 0.25);
+    opacity: 0;
+    transform: translateY(50vh);
+  }
+  
+  to {
+    background-color: rgaba(#000, 0);
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
