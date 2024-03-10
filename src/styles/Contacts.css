@@ -37,6 +37,7 @@
     height: 39rem;
     flex-direction: column;
     background-color: rgba(0, 0, 0, 0.7);
+
   }
 
 
@@ -45,6 +46,10 @@
     margin: 2rem auto;
     text-align: center;
     color: #fff;
+    animation: fade-in 1.5s forwards;
+    background-color: rgaba(#000, 0.25);
+    opacity: 0;
+    transform: translateY(50vh);
   }
 
   #head-text {
@@ -66,6 +71,11 @@
     flex-wrap: wrap;
     justify-content: space-between;
     height: fit-content;
+    animation: fade-in 1.5s forwards;
+    background-color: rgaba(#000, 0.25);
+    opacity: 0;
+    transform: translateY(50vh);
+    
   }
 
   .item-input {
@@ -175,3 +185,16 @@
   margin: auto;
 }
 
+@keyframes fade-in {
+  from {
+    background-color: rgaba(#000, 0.25);
+    opacity: 0;
+    transform: translateY(50vh);
+  }
+  
+  to {
+    background-color: rgaba(#000, 0);
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

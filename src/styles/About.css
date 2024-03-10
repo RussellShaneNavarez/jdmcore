@@ -65,7 +65,7 @@
   height: fit-content;
   display: flex;
   justify-content: space-between;
-  width: 70%;
+  width: 60%;
   margin: 3rem auto;
   animation: fade-in 1.5s forwards;
   background-color: rgaba(#000, 0.25);
