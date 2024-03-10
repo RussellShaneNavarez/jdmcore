@@ -23,7 +23,7 @@
   display: flex;
   padding: 4rem;
   margin: auto;
-  height: 50rem;
+  height: 38rem;
   flex-direction: column;
   background-color: rgba(0, 0, 0, 0.7);
 }
@@ -56,7 +56,7 @@
 }
 
 .title-container p{
-  font-size: 2.7rem;
+  font-size: 2.6rem;
   color: #fff;
   font-weight: 800;
 }
@@ -65,7 +65,7 @@
   height: fit-content;
   display: flex;
   justify-content: space-between;
-  width: 60%;
+  width: 65%;
   margin: 3rem auto;
   animation: fade-in 1.5s forwards;
   background-color: rgaba(#000, 0.25);
@@ -80,7 +80,7 @@
 
 
 .col-img img {
-  width: 25rem;
+  width: 20rem;
   border-radius: 50%;
 
 }

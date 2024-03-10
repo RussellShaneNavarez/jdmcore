@@ -55,7 +55,7 @@ const Contacts = () => {
       <Navbar/>
       <div className="content-contacts">
         <div className="container-text">
-          <p id="head-text">Send us a message!</p>
+          <p id="head-text">SEND US A MESSAGE!</p>
           <p id="sub-text">Got a question or proposal, or just want<br></br>
           to say hello? Go ahead. </p>
         </div>

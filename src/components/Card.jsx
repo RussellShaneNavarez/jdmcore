@@ -6,7 +6,7 @@ const redirectToDetails = (objectId) => {
 };
 
 const Card = ({ car, toggleFavorite, profile, userFavorites }) => {
-  const { id, brand, model, year, description, maxPower, maxSpeed, acceleration, price, story, imgUrl } = car;
+  const { id, brand, model, year, imgUrl } = car;
 
   return (
     <div key={id} className="card"> 
@@ -14,12 +14,6 @@ const Card = ({ car, toggleFavorite, profile, userFavorites }) => {
       <div className="card-details">
         <div className="details">
           <p><strong>{brand} {model}</strong> - {year}</p>
-          <p><strong>Description:</strong> {description}</p>
-          <p><strong>Max Power:</strong> {maxPower} hp</p>
-          <p><strong>Max Speed:</strong> {maxSpeed} km/h</p>
-          <p><strong>Acceleration:</strong> {acceleration} sec (0-100 km/h)</p>
-          <p><strong>Price:</strong> ${price}</p>
-          <p><strong>Story:</strong> {story}</p>
         </div>
         <div className='favorite'>
           {profile ? ( // Check if profile exists

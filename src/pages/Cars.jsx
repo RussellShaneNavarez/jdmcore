@@ -107,6 +107,12 @@ const Cars = () => {
     <div className="cars-container">
       <Navbar />
       <div className="cars-content">
+
+        <div className="title-container">
+          <p id="sub-title"> DISCOVER THE JDM CARS</p>
+          <p id="main-title"> GALLERY CAR</p>
+        </div>
+
         <div className="select-container">
           <select value={selectedBrand} onChange={(e) => setSelectedBrand(e.target.value)}>
             <option value="">All Brands</option>
@@ -120,8 +126,6 @@ const Cars = () => {
               <option key={index} value={model}>{model}</option>
             ))}
           </select>
-        </div>
-        <div className="input-container">
           <input
             className='search-input'
             type="text"
