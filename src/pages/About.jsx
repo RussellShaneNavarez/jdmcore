@@ -17,7 +17,7 @@ const About = () => {
               <div className="col-img">
                 <img src={require('../assets/img/chri-img.jpg')} />
                 <div className="text-box">
-                  <h3>Christian Martin Mitra</h3>
+                  <h1>Christian Martin Mitra</h1>
                   <p> Jr. Software Engineer | 21</p>
                 </div>
                 
@@ -25,7 +25,7 @@ const About = () => {
               <div className="col-img">
                 <img src={require('../assets/img/russ-img.jpg')} />
                 <div className="text-box">
-                  <h3>Russell Shane Navarez</h3>
+                  <h1>Russell Shane Navarez</h1>
                   <p>Full Stack Developer | 22</p>
                 </div>
               </div>

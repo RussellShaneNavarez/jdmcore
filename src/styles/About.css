@@ -76,11 +76,11 @@
 
 
 .col-img img {
-  width: 28rem;
+  width: 25rem;
   border-radius: 50%;
 }
 
-.col-img h3 {
+.col-img h1 {
   color: #fff;
 }
 
