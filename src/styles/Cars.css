@@ -3,11 +3,6 @@
   padding: 0;
 }
 
-.cars-container {
-    position: relative;
-    min-height: 100vh;
-}
-
 .navbar {
   position: fixed;
   top: 0;
@@ -19,20 +14,8 @@
 .cars-content {
   padding: 2em;
   margin-top: 4em; 
-  
-}
-
-.cars-content::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('../assets/img/cars-bg.jpg');
-  background-size: cover;
-  opacity: 0.8; /* Adjust the value between 0 (fully transparent) and 1 (fully opaque) */
-  z-index: -1; /* Place the pseudo-element behind other content */
+  background-color: black;
+  animation: transitionIn 1.75s;
 }
 
 .title-container {
@@ -98,4 +81,24 @@
   justify-content: center;
   padding-left: 2%;
   padding-right: 2%;
+  width: 80%;
+  margin: auto;
+  height: fit-content;
+  margin-bottom: 2rem;
+  column-gap: 3rem;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 3rem;
+}
+
+@keyframes transitionIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
