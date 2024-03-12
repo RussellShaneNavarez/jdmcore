@@ -7,7 +7,8 @@
 }
 
 body {
-    background-color: #e6e3e3;
+    background-color: #000000;
+    color: white;
 }
 
 .video-container {
@@ -58,32 +59,96 @@ body {
     line-height: 1.5;
   }
 
-
-  /*DA MODIFICARE DA QUA ANCORA*/
 header {
     position: relative;
 }
 
-.main {
-    width: 80%;
-    margin: 2rem auto;
-    
+.nissan-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 3rem;
 }
 
-.sub-main {
-    margin: auto;
-    text-align: center;
+.nissan-title h2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3rem;
+  font-size: 5rem;
 }
 
-.sub-main img {
-    margin: 1rem auto;
-    width: 25rem;
+.nissan-div {
+  display: flex;
+  margin: 5rem;
+  justify-content: center;
+  align-items: center;
+  gap: 8rem;
+  opacity: 0;
 }
 
-hr {
-    width: 8%;
-    margin: auto;
-    border: 2px solid #aca9a9;
+.nissan-div img {
+  width: 40rem;
 }
+
+.fadeInAnimation {
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+.nissan-div:nth-child(odd) .fadeInAnimation {
+  animation-name: fadeInFromLeft;
+}
+
+.nissan-div:nth-child(even) .fadeInAnimation {
+  animation-name: fadeInFromRight;
+}
+
+@keyframes fadeInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.overview-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; 
+}
+
+.overview-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  gap: 5rem;
+  width: 80%;
+}
+
+.overview-container h2 {
+  font-size: 5rem;
+}
+
+.overview-container p {
+  font-size: 1.5rem;
+}
+
+
 
 
