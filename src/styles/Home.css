@@ -75,14 +75,15 @@ header {
   align-items: center;
   margin-top: 3rem;
   font-size: 5rem;
+  margin-bottom: 12rem;
 }
 
 .nissan-div {
   display: flex;
-  margin: 5rem;
+  margin: 10rem;
   justify-content: center;
   align-items: center;
-  gap: 8rem;
+  gap: 10rem;
   opacity: 0;
 }
 
@@ -137,7 +138,7 @@ header {
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  gap: 5rem;
+  margin: 5rem;
   width: 80%;
 }
 
@@ -147,6 +148,29 @@ header {
 
 .overview-container p {
   font-size: 1.5rem;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+}
+
+.explore-btn {
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: white;
+}
+
+.overview-container button {
+  margin-left: 45%;
+  margin-right: 45%;
+  border: none;
+  border-radius: 0.25rem; 
+  font-size: 1em; 
+  cursor: pointer;
+  background-color: red;
+}
+
+.overview-container button:hover {
+  transition: background-color 0.5s, color 0.5s;
+  background-color: #a60000; 
 }
 
 

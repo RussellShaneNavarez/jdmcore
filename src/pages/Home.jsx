@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 export const Home = () => {
 
   const scrollUp = useRef();
+  // const scrollDown = useRef();
 
   const scrollHandler = (elmRef) => {
     console.log(elmRef.current);
@@ -59,13 +60,14 @@ export const Home = () => {
           <div className="overlay-text">
             <h1>Welcome to JDM Core</h1>
             <p>Discover the thrill of JDM culture</p>
+            {/* <p onClick={() => scrollHandler(scrollDown)} className='scrollDownBtn'>↓</p> */}
            </div>
           <header>
             <Navbar />
           </header>
         </div>
         </div>
-        <div className="main">
+        <div className="main">{/*ref={scrollDown */}
         <section className="overview-section" >
          <div className="overview-container">
           <h2>Overview</h2>
