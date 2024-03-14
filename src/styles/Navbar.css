@@ -42,6 +42,17 @@ li {
     font-size: 1rem;
 }
 
+.profile-navbar {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    gap: 1rem;
+}
+
+.profile-navbar p {
+    margin: auto;
+}
+
 .sub-navbar {
     width: 80%;
     margin: 0 auto;

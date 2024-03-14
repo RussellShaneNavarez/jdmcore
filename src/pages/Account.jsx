@@ -2,11 +2,30 @@ import { Navbar } from "../components/Navbar";
 import { Footer } from '../components/Footer';
 import '../styles/Account.css';
 import { useAuthContext } from '../providers/AuthProvider';
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useFirebaseContext } from "../providers/FirebaseProvider";
+import { collection, query, where, getDocs } from 'firebase/firestore';
 
 const Account = () => {
     const { profile, logout, deleteAccount } = useAuthContext();
+    const { myFS } = useFirebaseContext();
     const [deleteConfirmation, setDeleteConfirmation] = useState(false);
+    const [displayName, setDisplayName] = useState('');
+
+    useEffect(() => {
+      const fetchDisplayName = async () => {
+        if (profile) {
+          const usersRef = collection(myFS, 'Users');
+          const q = query(usersRef, where('uid', '==', profile.uid));
+          const querySnapshot = await getDocs(q);
+          querySnapshot.forEach((doc) => {
+            setDisplayName(doc.data().displayName);
+          });
+        }
+      };
+  
+      fetchDisplayName();
+    }, [profile, myFS]);
 
     const handleLogout = async () => {
       try {
@@ -44,6 +63,7 @@ const Account = () => {
         <div className="account-profile">
         {profile ? (
         <>
+          <p>Display Name: {displayName}</p>
           <p>Email: {profile.email}</p>
           <div className="profile-btn">
           <button onClick={handleLogout}>Logout</button>

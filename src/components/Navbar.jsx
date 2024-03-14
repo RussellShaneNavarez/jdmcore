@@ -4,6 +4,8 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useAuthContext } from '../providers/AuthProvider';
+import { useFirebaseContext } from '../providers/FirebaseProvider';
+import { collection, query, where, getDocs } from 'firebase/firestore';
 
 import '../styles/Navbar.css';
 
@@ -11,7 +13,24 @@ library.add(faBars); // Add icons to the library
 
 export const Navbar = () => {
   const { profile, logout } = useAuthContext();
+  const { myFS } = useFirebaseContext();
+  const [displayName, setDisplayName] = useState('');
   const allowedEmails = ["russellnavarez18@gmail.com", "christianmitra7@gmail.com", "jdmcore02@gmail.com"];
+
+  useEffect(() => {
+    const fetchDisplayName = async () => {
+      if (profile) {
+        const usersRef = collection(myFS, 'Users');
+        const q = query(usersRef, where('uid', '==', profile.uid));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+          setDisplayName(doc.data().displayName);
+        });
+      }
+    };
+
+    fetchDisplayName();
+  }, [profile, myFS]);
 
   const handleLogout = async () => {
     try {
@@ -65,9 +84,15 @@ export const Navbar = () => {
           {allowedEmails.includes(profile?.email) && <li><Link to="/carformonlyadmin">CarForm</Link></li>}
         </ul>
         {profile ? (
+          <div className='profile-navbar'>
+          <p>Hello, {displayName}!</p>
           <button className="action_btn" onClick={handleLogout}>Logout</button>
+          </div>
         ) : (
+          <div className='profile-navbar'>
+          <p>Hello!</p>
           <Link to="/login" className="action_btn">Sign In</Link>
+          </div>
         )}
         <div ref={toggleBtnRef} className='toggle_btn'>
           <FontAwesomeIcon icon="bars" />
