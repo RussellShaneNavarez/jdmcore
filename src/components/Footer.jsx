@@ -12,7 +12,7 @@ export const Footer = () => {
                     <ul>
                         <li><a href="/">Home</a></li>
                         <li><a href="/cars">Cars</a></li>
-                        <li><a href="/profile">Profile</a></li>
+                        <li><a href="/account">Account</a></li>
                     </ul>
                 </div>
                 <div className="col">
@@ -31,11 +31,11 @@ export const Footer = () => {
                     </div>
                     <br></br>
                     <div className="social-icons">
-                        <p> Russell Socials: </p>
+                        <p> Russ Socials: </p>
                         <a href="https://github.com/RussellShaneNavarez"><img src={require('../assets/img/github-logo.png')}></img></a>
                         <a href="https://www.linkedin.com/in/russell-shane-navarez/"><img src={require('../assets/img/linkedin-icon.png')}></img></a>
                         <a href="https://www.instagram.com/russnvrz/"><img src={require('../assets/img/instagram-logo.png')}></img></a>
-                        <a href="mailto:russell@gmail.com"><img src={require('../assets/img/gmail-logo.png')}></img></a>
+                        <a href="mailto:russellnavarez18@gmail.com"><img src={require('../assets/img/gmail-logo.png')}></img></a>
                     </div>
                 </div>
             </div>

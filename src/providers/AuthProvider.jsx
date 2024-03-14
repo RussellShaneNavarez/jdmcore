@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, sendPasswordResetEmail, signOut } from 'firebase/auth';
-import { doc, onSnapshot, setDoc, serverTimestamp } from 'firebase/firestore';
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, sendPasswordResetEmail, signOut, deleteUser } from 'firebase/auth';
+import { doc, onSnapshot, setDoc, serverTimestamp, deleteDoc } from 'firebase/firestore';
 import { useFirebaseContext } from './FirebaseProvider';
 
 export const AuthContext = createContext({});
@@ -131,6 +131,21 @@ const AuthProvider = (props) => {
         }
     };
 
+    const deleteAccount = async () => {
+        try {
+            const currentUser = myAuth.currentUser;
+            await deleteUser(currentUser);
+            const userDocRef = doc(myFS, PROFILE_COLLECTION, currentUser.uid);
+            await deleteDoc(userDocRef);
+            setUser(null);
+            console.log('Account deleted successfully');
+            return true;
+        } catch (error) {
+            alert(error.message);
+            return false;
+        }
+    };
+
     if (authLoading) {
         return <h1>Loading</h1>;
     }
@@ -141,7 +156,8 @@ const AuthProvider = (props) => {
         login,
         logout,
         register,
-        forgotPassword
+        forgotPassword,
+        deleteAccount
     };
 
     return (
