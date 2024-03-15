@@ -1,19 +1,23 @@
+import { useState, useEffect} from "react";
 import { Navbar } from "../components/Navbar";
 import { Footer } from '../components/Footer';
 import '../styles/Account.css';
 import { useAuthContext } from '../providers/AuthProvider';
-import { useState, useEffect } from "react";
 import { useFirebaseContext } from "../providers/FirebaseProvider";
 import { collection, query, where, getDocs, doc, updateDoc } from 'firebase/firestore';
 
 const Account = () => {
-    const { profile, logout, deleteAccount } = useAuthContext();
+    const { profile, logout, deleteAccount, handleChangePassword } = useAuthContext();
     const { myFS } = useFirebaseContext();
     const [deleteConfirmation, setDeleteConfirmation] = useState(false);
     const [displayName, setDisplayName] = useState('');
     const [editMode, setEditMode] = useState(false);
     const [newDisplayName, setNewDisplayName] = useState('');
     const [updateConfirmation, setUpdateConfirmation] = useState(false);
+    const [currentPassword, setCurrentPassword] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    const [confirmNewPassword, setConfirmNewPassword] = useState('');
+    const [showPasswordFields, setShowPasswordFields] = useState(false); // New state for controlling password change fields visibility
 
     useEffect(() => {
       const fetchDisplayName = async () => {
@@ -84,90 +88,152 @@ const Account = () => {
       setUpdateConfirmation(false); 
     };
 
+    const handlePasswordChange = async () => {
+      try {
+        if (currentPassword === '') {
+          alert('Please enter your current password.');
+          return;
+        }
+
+        await handleChangePassword(currentPassword, newPassword);
+        setCurrentPassword('');
+        setNewPassword('');
+        setConfirmNewPassword('');
+        console.log('Password changed successfully');
+      } catch (error) {
+        alert(error.message);
+      }
+    };
+
     return (
       <div className="container">
         <Navbar/>
         <div className="account-content">
-        <h1>ACCOUNT</h1>
-        <div className="account-profile">
-        {profile ? (
-        <>
-        <div className="credentials">
-        <label>Display Name:</label> 
-        {editMode ? 
-          <input 
-              type="text" 
-              value={newDisplayName} 
-              onChange={handleDisplayNameChange} 
-              placeholder="Enter new display name" 
-            /> 
-            : <input 
-              type="text" 
-              value={displayName} 
-              placeholder="Display Name" 
-              disabled 
-            />
-          }
-          </div>
+          <h1>ACCOUNT</h1>
+          <div className="account-profile">
+            {profile ? (
+              <>
+                <div className="credentials">
+                  <label>Display Name:</label> 
+                  {editMode ? 
+                    <input 
+                      type="text" 
+                      value={newDisplayName} 
+                      onChange={handleDisplayNameChange} 
+                      placeholder="Enter new display name" 
+                    /> 
+                    : <input 
+                      type="text" 
+                      value={displayName} 
+                      placeholder="Display Name" 
+                      disabled 
+                    />
+                  }
+                </div>
+                <div className="credentials">
+                  <label>Email:</label> 
+                  {editMode ? (
+                    <input 
+                      type="text" 
+                      placeholder={profile.email}
+                      disabled 
+                    />
+                  ) : (
+                    <input
+                      type="text"
+                      value={profile.email}
+                      placeholder="Email"
+                      disabled
+                    />
+                  )}
+                </div>
 
-          <div className="credentials">
-            <label>Email:</label> 
-            {editMode ? (
-              <input 
-                type="text" 
-                placeholder={profile.email}
-                disabled 
-              />
+                {editMode && (
+                  <div className="credentials">
+                    <label>Change Password:</label>
+                    <button onClick={() => setShowPasswordFields(!showPasswordFields)}>
+                      {showPasswordFields ? "Hide" : "Show"}
+                    </button>
+                  </div>
+                )}
+                {showPasswordFields && editMode && ( 
+                  <>
+                    <div className="credentials">
+                      <label>Current Password:</label>
+                      <input
+                        type="password"
+                        value={currentPassword}
+                        onChange={(e) => setCurrentPassword(e.target.value)}
+                        placeholder="Current Password"
+                      />
+                    </div>
+
+                    <div className="credentials">
+                      <label>New Password:</label>
+                      <input
+                        type="password"
+                        value={newPassword}
+                        onChange={(e) => setNewPassword(e.target.value)}
+                        placeholder="New Password"
+                      />
+                    </div>
+
+                    <div className="credentials">
+                      <label>Confirm New Password:</label>
+                      <input
+                        type="password"
+                        value={confirmNewPassword}
+                        onChange={(e) => setConfirmNewPassword(e.target.value)}
+                        placeholder="Confirm New Password"
+                      />
+                    </div>
+                  </>
+                )}
+                <div className="profile-btn">
+                  <button onClick={handleLogout}>Logout</button>
+                  <p onClick={toggleDeleteConfirmation}>Delete Account</p>
+                  <button onClick={toggleEditMode}>
+                    {editMode ? 'Cancel' : 'Edit Display Name'}
+                  </button>
+                  {editMode && 
+                  <button onClick={handleUpdateDisplayName}>Save Display Name</button>}
+                  {showPasswordFields && (
+                    <button onClick={handlePasswordChange}>Change Password</button>
+                  )}
+                </div>
+              </>
             ) : (
-              <input
-                type="text"
-                value={profile.email}
-                placeholder="Email"
-                disabled
-              />
+              <p>Register or log in</p>
             )}
-            </div>
-        
+          </div>
 
-          <div className="profile-btn">
-            <button onClick={handleLogout}>Logout</button>
-            <p onClick={toggleDeleteConfirmation}>Delete Account</p>
-            <button onClick={toggleEditMode}>
-              {editMode ? 'Cancel' : 'Edit Credentials'}
-            </button>
-            {editMode && <button onClick={handleUpdateDisplayName}>Save</button>}
-            
-          </div>
-        </>
-      ) : (
-        <p>Register or log in</p>
-      )}
-      {deleteConfirmation && (
-        <div className="confirmation-overlay">
-          <div className="confirmation-box">
-            <p>Are you sure you want to delete your account?</p>
-            <div className="confirmation-btn">
-              <button onClick={handleDeleteAccount}>Yes, delete</button>
-              <button onClick={toggleDeleteConfirmation}>Cancel</button>
+          {deleteConfirmation && (
+            <div className="confirmation-overlay">
+              <div className="confirmation-box">
+                <p>Are you sure you want to delete your account?</p>
+                <div className="confirmation-btn">
+                  <button onClick={handleDeleteAccount}>Yes, delete</button>
+                  <button onClick={toggleDeleteConfirmation}>Cancel</button>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      )}
-      {updateConfirmation && (
-        <div className="confirmation-overlay">
-          <div className="confirmation-box">
-            <p>Are you sure you want to update your display name?</p>
-            <div className="confirmation-btn">
-              <button onClick={confirmUpdateDisplayName}>Yes, update</button>
-              <button onClick={cancelUpdateDisplayName}>Cancel</button>
+          )}
+
+          {updateConfirmation && (
+            <div className="confirmation-overlay">
+              <div className="confirmation-box">
+                <p>Are you sure you want to update your display name?</p>
+                <div className="confirmation-btn">
+                  <button onClick={confirmUpdateDisplayName}>Yes, update</button>
+                  <button onClick={cancelUpdateDisplayName}>Cancel</button>
+                </div>
+              </div>
             </div>
+          )}
+
+          <div className="version">
+            <p>Version 1.0</p>
           </div>
-        </div>
-      )}
-      </div>
-      <div className="version">
-        <p>Version 1.0</p>
-      </div>
         </div>
         <Footer/>
       </div>

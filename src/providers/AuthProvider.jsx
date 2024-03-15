@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, sendPasswordResetEmail, signOut, deleteUser } from 'firebase/auth';
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, sendPasswordResetEmail, signOut, deleteUser, updatePassword } from 'firebase/auth';
 import { doc, onSnapshot, setDoc, serverTimestamp, deleteDoc } from 'firebase/firestore';
 import { useFirebaseContext } from './FirebaseProvider';
 
@@ -146,6 +146,13 @@ const AuthProvider = (props) => {
         }
     };
 
+    const handleChangePassword = async (currentPassword, newPassword) => {
+        await updatePassword(myAuth.currentUser, newPassword);
+        console.log("Password updated successfully");
+        alert("Password updated successfully");
+    };
+    
+
     if (authLoading) {
         return <h1>Loading</h1>;
     }
@@ -157,7 +164,8 @@ const AuthProvider = (props) => {
         logout,
         register,
         forgotPassword,
-        deleteAccount
+        deleteAccount,
+        handleChangePassword
     };
 
     return (
