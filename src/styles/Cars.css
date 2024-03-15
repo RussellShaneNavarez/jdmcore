@@ -85,6 +85,19 @@
   row-gap: 3rem;
 }
 
+.favorites-only {
+  width: 25%;
+  border-radius: 0.2rem;
+  border: none;
+  background-color: red;
+  color: white;
+}
+
+.favorites-only:hover {
+  transition: background-color 0.5s, color 0.5s;
+  background-color: #a60000; 
+}
+
 @keyframes transitionIn {
   from {
     opacity: 0;

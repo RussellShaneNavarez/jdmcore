@@ -35,6 +35,7 @@ export const Login = () => {
     try {
       await forgotPassword(email);
       setErrorMessage('');
+      alert('Email sent, check your inbox to reset your password!')
       console.log('Email sent');
     } catch (error) {
       setErrorMessage('');

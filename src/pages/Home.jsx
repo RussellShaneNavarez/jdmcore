@@ -82,9 +82,14 @@ export const Home = () => {
           <div className="overlay-text">
           {profile ? (
           <div className='overlay-home'>
+          {displayName.trim() === '' ? (
+            <h1>Welcome back!</h1>
+          ) : (
             <h1>Welcome back, {displayName}!</h1>
-            <p>Great to see you here again!</p>
-          </div>
+          )}
+          <p>Great to see you here again!</p>
+        </div>
+        
         ) : (
           <div className='overlay-home'>
             <h1>Welcome to JDM Core</h1>
@@ -113,7 +118,8 @@ export const Home = () => {
         </section>
         <section className="nissan-container">
           <div className='nissan-title'>
-          <h2>Nissan GT-R Series</h2>
+          <h2>&quot;Godzilla&quot;</h2>
+          <p>The most iconic sports car within the JDM Culture.</p>
           </div>
           
           {/* First div */}

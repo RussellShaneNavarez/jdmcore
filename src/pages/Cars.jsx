@@ -17,6 +17,7 @@ const Cars = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedBrand, setSelectedBrand] = useState('');
   const [selectedModel, setSelectedModel] = useState('');
+  const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
 
   // Effettua la lettura iniziale delle auto e dei preferiti dell'utente
   useEffect(() => {
@@ -66,8 +67,14 @@ const Cars = () => {
           );
       return brandMatches && modelMatches && searchTermMatches;
     });
-    setFilteredCars(filtered);
-  }, [cars, searchTerm, selectedBrand, selectedModel]);
+
+    if (showFavoritesOnly) {
+      const favoritesFiltered = filtered.filter(car => userFavorites.includes(car.id));
+      setFilteredCars(favoritesFiltered);
+    } else {
+      setFilteredCars(filtered);
+    }
+  }, [cars, searchTerm, selectedBrand, selectedModel, userFavorites, showFavoritesOnly]);
 
   // Ottiene i brand e i modelli unici per le opzioni del menu a tendina
   const brands = useMemo(() => [...new Set(cars.map(car => car.brand))], [cars]);
@@ -131,6 +138,9 @@ const Cars = () => {
             placeholder="Search by brand or model"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}/>
+            <button onClick={() => setShowFavoritesOnly(!showFavoritesOnly)} className='favorites-only'>
+            {showFavoritesOnly ? 'Show All' : 'Show Favorites'}
+          </button>
         </div>
         <div className="card-container">
           {loading ? (

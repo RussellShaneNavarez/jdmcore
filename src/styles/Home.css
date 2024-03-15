@@ -75,6 +75,14 @@ header {
   align-items: center;
   margin-top: 3rem;
   font-size: 5rem;
+}
+
+.nissan-title p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  font-size: 2rem;
   margin-bottom: 12rem;
 }
 
