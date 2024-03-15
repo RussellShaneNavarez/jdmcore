@@ -1,15 +1,22 @@
 import '../styles/Home.css';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import backgroundVideo from '../assets/vid/jdmbg.mp4';
 import r32 from '../assets/img/r32.jpg'
 import r33 from '../assets/img/r33.jpg'
 import r34 from '../assets/img/r34.jpg'
 import r35 from '../assets/img/r35.jpg'
 import { Link } from 'react-router-dom';
+import { useAuthContext } from '../providers/AuthProvider';
+import { useFirebaseContext } from '../providers/FirebaseProvider';
+import { collection, query, where, getDocs } from 'firebase/firestore';
 
 export const Home = () => {
+
+  const { myFS } = useFirebaseContext();
+  const [displayName, setDisplayName] = useState('');
+  const { profile } = useAuthContext();
 
   const scrollUp = useRef();
   // const scrollDown = useRef();
@@ -18,6 +25,21 @@ export const Home = () => {
     console.log(elmRef.current);
     window.scrollTo({ top: elmRef.current.offsetTop, behavior: "smooth" });
   };
+
+  useEffect(() => {
+    const fetchDisplayName = async () => {
+      if (profile) {
+        const usersRef = collection(myFS, 'Users');
+        const q = query(usersRef, where('uid', '==', profile.uid));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+          setDisplayName(doc.data().displayName);
+        });
+      }
+    };
+
+    fetchDisplayName();
+  }, [profile, myFS]);
 
   // For Nissan DIV
   useEffect(() => {
@@ -58,9 +80,17 @@ export const Home = () => {
                 Your browser does not support the video tag.
               </video>
           <div className="overlay-text">
+          {profile ? (
+          <div className='overlay-home'>
+            <h1>Welcome back, {displayName}!</h1>
+            <p>Great to see you here again!</p>
+          </div>
+        ) : (
+          <div className='overlay-home'>
             <h1>Welcome to JDM Core</h1>
             <p>Discover the thrill of JDM culture</p>
-            {/* <p onClick={() => scrollHandler(scrollDown)} className='scrollDownBtn'>↓</p> */}
+          </div>
+        )}
            </div>
           <header>
             <Navbar />

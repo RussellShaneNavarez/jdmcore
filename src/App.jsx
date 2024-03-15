@@ -11,7 +11,6 @@ import CarForm from "./pages/CarForm";
 import Details from "./pages/Details";
 import Account from "./pages/Account";
 
-
 const App = () => {
   return (
     <Router>

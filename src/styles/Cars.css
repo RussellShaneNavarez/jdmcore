@@ -1,8 +1,3 @@
-* {
-  margin: 0;
-  padding: 0;
-}
-
 .navbar {
   position: fixed;
   top: 0;
@@ -51,7 +46,6 @@
   width: 9rem;
   border: none;
   border-radius: 0.2rem;
-  transition: 0.8s;
   cursor: pointer;
   height: 2rem;
   background-color: #cfcfcf;

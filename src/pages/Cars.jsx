@@ -7,7 +7,6 @@ import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import '../styles/Cars.css';
 
-
 const Cars = () => {
   const { myFS } = useFirebaseContext();
   const { profile } = useAuthContext();

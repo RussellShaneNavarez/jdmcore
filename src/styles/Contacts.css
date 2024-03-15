@@ -1,17 +1,10 @@
-  * {
-      margin: 0;
-      padding: 0;
-  }
-    
-
-    
-  .navbar {
-    position: fixed; /* Change to fixed positioning */
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-  }
+.navbar {
+  position: fixed; /* Change to fixed positioning */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
 
   .container-contacts::before {
     content: "";
