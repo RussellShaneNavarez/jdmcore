@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react'; // Import useState hook
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react'; 
 import '../styles/Card.css';
 import emptyHeartSvg from '../assets/img/empty-heart.svg';
 import fullHeartSvg from '../assets/img/full-heart.svg'; 
@@ -51,12 +50,6 @@ const Card = ({ car, profile, userFavorites, toggleFavorite }) => {
             ) : (
               <div className='loginregister'>
                 <p>Please sign in or register to add favorites</p>
-                <button>
-                  <Link to="/login" className="button">Login</Link>
-                </button>
-                <button>
-                  <Link to="/register" className="button">Register</Link>
-                </button>
               </div>
             )}
           </div>

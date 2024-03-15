@@ -88,13 +88,26 @@ const Account = () => {
       setUpdateConfirmation(false); 
     };
 
+    const passwordsMatch = () => {
+      return newPassword === confirmNewPassword;
+    };
+    
+
     const handlePasswordChange = async () => {
       try {
         if (currentPassword === '') {
           alert('Please enter your current password.');
           return;
         }
-
+        if (newPassword === '' || confirmNewPassword === '') {
+          alert('Please enter both new password and confirm new password.');
+          return;
+        }
+        if (!passwordsMatch()) {
+          alert('New password and confirm new password do not match.');
+          return;
+        }
+    
         await handleChangePassword(currentPassword, newPassword);
         setCurrentPassword('');
         setNewPassword('');
@@ -104,6 +117,7 @@ const Account = () => {
         alert(error.message);
       }
     };
+    
 
     return (
       <div className="account-container">
