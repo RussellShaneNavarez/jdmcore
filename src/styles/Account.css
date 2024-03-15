@@ -6,6 +6,27 @@
       z-index: 1000;
   }
 
+  .account-container button {
+    background-color: red;
+    color: #fff;
+    padding: 0.4em 1em; 
+    border: none;
+    border-radius: 0.25rem; 
+    font-size: 1em; 
+    cursor: pointer;
+  }
+
+  .account-container button:hover {
+    transition: background-color 0.5s, color 0.5s;
+    background-color: #a60000; 
+  }
+
+  .delete-account {
+    color: red;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
 .account-content {
     align-items: center;
     justify-content: center;
@@ -25,17 +46,27 @@
 .account-profile {
   display: flex;
   justify-content: center;
-  align-items: center;
   flex-direction: column;
-  width: 30%;
+  width: 35%;
 }
+
+.account-content
 
 .credentials {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  flex-direction: column;
-  width: 60%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.credentials input {
+  border-radius: 0.25rem; 
+  border: none;
+  border: 1px solid black; 
+  transition: border-color 0.3s ease; 
+}
+
+.credentials input:disabled {
+  background-color: rgb(150, 150, 150);
 }
 
 .confirmation-overlay {
@@ -60,4 +91,22 @@
 
 .version {
   margin: 3rem;
+}
+
+.profile-btn {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-change {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.delete-logout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

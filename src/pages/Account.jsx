@@ -17,7 +17,7 @@ const Account = () => {
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
-    const [showPasswordFields, setShowPasswordFields] = useState(false); // New state for controlling password change fields visibility
+    const [showPasswordFields, setShowPasswordFields] = useState(false); 
 
     useEffect(() => {
       const fetchDisplayName = async () => {
@@ -106,7 +106,7 @@ const Account = () => {
     };
 
     return (
-      <div className="container">
+      <div className="account-container">
         <Navbar/>
         <div className="account-content">
           <h1>ACCOUNT</h1>
@@ -190,8 +190,8 @@ const Account = () => {
                   </>
                 )}
                 <div className="profile-btn">
-                  <button onClick={handleLogout}>Logout</button>
-                  <p onClick={toggleDeleteConfirmation}>Delete Account</p>
+
+                  <div className="edit-change">
                   <button onClick={toggleEditMode}>
                     {editMode ? 'Cancel' : 'Edit Display Name'}
                   </button>
@@ -200,6 +200,13 @@ const Account = () => {
                   {showPasswordFields && (
                     <button onClick={handlePasswordChange}>Change Password</button>
                   )}
+                  </div>
+
+                  <div className="delete-logout">
+                  <p className="delete-account" onClick={toggleDeleteConfirmation}>Delete Account</p>
+                  <button onClick={handleLogout}>Logout</button>
+                  </div>
+
                 </div>
               </>
             ) : (
