@@ -1,8 +1,8 @@
-import { useState } from 'react'; // Import useState hook
+import { useState, useEffect } from 'react'; // Import useState hook
 import { Link } from 'react-router-dom';
 import '../styles/Card.css';
 import emptyHeartSvg from '../assets/img/empty-heart.svg';
-import fullHeartSvg from '../assets/img/full-heart.svg'; // Import the full heart icon
+import fullHeartSvg from '../assets/img/full-heart.svg'; 
 import speedSvg from '../assets/img/speed-meter-svgrepo-com.svg';
 import powerSvg from '../assets/img/racing-speed-svgrepo-com.svg';
 
@@ -15,6 +15,10 @@ const Card = ({ car, profile, userFavorites, toggleFavorite }) => {
 
   // State to keep track of whether the car is favorited or not
   const [favorited, setFavorited] = useState(userFavorites.includes(id));
+
+  useEffect(() => {
+    setFavorited(userFavorites.includes(id));
+  }, [userFavorites, id]);
 
   // Function to toggle the favorite status of the car
   const handleToggleFavorite = () => {
