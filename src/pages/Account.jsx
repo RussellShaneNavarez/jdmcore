@@ -224,7 +224,10 @@ const Account = () => {
                 </div>
               </>
             ) : (
+              
+              <div className="profile-p">
               <p>Register or log in</p>
+              </div>
             )}
           </div>
 
