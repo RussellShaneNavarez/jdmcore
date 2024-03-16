@@ -18,8 +18,25 @@ export const Home = () => {
   const [displayName, setDisplayName] = useState('');
   const { profile } = useAuthContext();
 
+  const [isScrollingDown, setIsScrollingDown] = useState(false);
+  const [prevScrollY, setPrevScrollY] = useState(0);
+
   const scrollUp = useRef();
   // const scrollDown = useRef();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      setIsScrollingDown(currentScrollY > prevScrollY);
+      setPrevScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [prevScrollY]);
 
   const scrollHandler = (elmRef) => {
     console.log(elmRef.current);
@@ -167,12 +184,36 @@ export const Home = () => {
             </div>
           </div>
         </section>
+        <section className="nagata-container">
+              <div className="nagata-title">
+                <h2>The Legend: Smokey Nagata & His Golden Supra</h2>
+                <p>Image</p>
+              </div>
+              {/* First div */}
+              <div className="nagata-div">
+                <div className="nagata-img">
+                  {/* Image of Smokey Nagata */}
+                  {/*<img src={smokeyNagataImage} alt="Smokey Nagata" />*/}
+                </div>
+              <div className="content">
+                <h2>Smokey Nagata&apos;s Toyota Supra</h2>
+                <p>In the heart of Japan&apos;s underground racing scene, a legend was born - Smokey Nagata. With his golden Toyota Supra, Smokey redefined the boundaries of speed and performance.</p>
+                <p>Smokey Nagata gained international notoriety for his daring high-speed runs on public roads and highways, capturing the attention of enthusiasts worldwide. His fearless exploits behind the wheel of his highly modified Supra earned him a place in automotive folklore.</p>
+                <p>The golden Supra, meticulously engineered and tuned to perfection, became an emblem of Smokey&apos;s audacity and technical prowess. With speeds surpassing 300 km/h, Smokey&apos;s Supra was a testament to his relentless pursuit of speed and adrenaline.</p>
+                <button>Learn more</button>
+              </div>
+            </div>
+              {/* Second div */}
+              {/* Add more divs if needed */}
+          </section>
         </div>
+        {isScrollingDown && (
         <div className="scrollUpDiv">
-            <button onClick={() => scrollHandler(scrollUp)} className="scrollUp">
-             Scroll up
-            </button>
+          <button onClick={() => scrollHandler(scrollUp)} className="scrollUp">
+            Scroll up
+          </button>
         </div>
+      )}
       <Footer />      
       </div>              
     ); 

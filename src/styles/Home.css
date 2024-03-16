@@ -181,6 +181,23 @@ header {
   background-color: #a60000; 
 }
 
+.scrollUp {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 9999; 
+}
 
+.scrollUpDiv button {
+  background-color: red;
+  border: none;
+  border-radius: 0.25rem;
+  color: white;
+}
+
+
+.nagata-container {
+  background: linear-gradient(to bottom, rgb(0, 0, 0), rgb(255, 215, 0))
+}
 
 
