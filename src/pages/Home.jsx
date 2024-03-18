@@ -61,7 +61,7 @@ export const Home = () => {
 
   // For Nissan DIV
   useEffect(() => {
-    const nissanDivs = document.querySelectorAll('.nissan-div');
+    const nissanDivs = document.querySelectorAll('.nissan-div, .overview-section');
     
     const options = {
       root: null,
@@ -87,6 +87,88 @@ export const Home = () => {
   
     return () => observer.disconnect();
   }, []);
+
+  // For Nissan Titles
+  useEffect(() => {
+    const titles = document.querySelectorAll('.nissan-title');
+  
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.5
+    };
+  
+    const callback = (entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const h2Element = entry.target.querySelector('h2');
+          const pElement = entry.target.querySelector('p');
+  
+          h2Element.classList.add('fadeInRight');
+          pElement.classList.add('fadeInLeft');
+  
+          observer.unobserve(entry.target);
+        }
+      });
+    };
+  
+    const observer = new IntersectionObserver(callback, options);
+    titles.forEach(title => observer.observe(title));
+  
+    return () => observer.disconnect();
+  }, []);  
+
+  // For Nagata DIV
+  useEffect(() => {
+    const titles = document.querySelectorAll('.nagata-title h2');
+
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.5
+    };
+
+    const callback = (entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fadeIn');
+          observer.unobserve(entry.target);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(callback, options);
+    titles.forEach(title => observer.observe(title));
+
+    return () => observer.disconnect();
+  }, []);
+
+  // For Nagata DIV
+useEffect(() => {
+  const nagataDivs = document.querySelectorAll('.nagata-div');
+
+  const options = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.5 
+  };
+
+  const callback = (entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const imgElement = entry.target.querySelector('.nagata-img img');
+        imgElement.classList.add('fadeIn');
+
+        observer.unobserve(entry.target);
+      }
+    });
+  };
+
+  const observer = new IntersectionObserver(callback, options);
+  nagataDivs.forEach(div => observer.observe(div));
+
+  return () => observer.disconnect();
+}, []);
 
     return (
       <div>
