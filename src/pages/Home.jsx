@@ -3,6 +3,7 @@ import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import { useRef, useEffect, useState } from 'react';
 import backgroundVideo from '../assets/vid/jdmbg.mp4';
+import nagata from '../assets/img/nagata.jpg';
 import r32 from '../assets/img/r32.jpg'
 import r33 from '../assets/img/r33.jpg'
 import r34 from '../assets/img/r34.jpg'
@@ -186,25 +187,22 @@ export const Home = () => {
         </section>
         <section className="nagata-container">
               <div className="nagata-title">
-                <h2>The Legend: Smokey Nagata & His Golden Supra</h2>
-                <p>Image</p>
+                <h2>The Legend</h2>
+                <h2>Smokey Nagata</h2>
               </div>
-              {/* First div */}
               <div className="nagata-div">
                 <div className="nagata-img">
-                  {/* Image of Smokey Nagata */}
-                  {/*<img src={smokeyNagataImage} alt="Smokey Nagata" />*/}
+                 
+                  <img src={nagata} alt="Smokey Nagata" />
                 </div>
-              <div className="content">
-                <h2>Smokey Nagata&apos;s Toyota Supra</h2>
-                <p>In the heart of Japan&apos;s underground racing scene, a legend was born - Smokey Nagata. With his golden Toyota Supra, Smokey redefined the boundaries of speed and performance.</p>
-                <p>Smokey Nagata gained international notoriety for his daring high-speed runs on public roads and highways, capturing the attention of enthusiasts worldwide. His fearless exploits behind the wheel of his highly modified Supra earned him a place in automotive folklore.</p>
-                <p>The golden Supra, meticulously engineered and tuned to perfection, became an emblem of Smokey&apos;s audacity and technical prowess. With speeds surpassing 300 km/h, Smokey&apos;s Supra was a testament to his relentless pursuit of speed and adrenaline.</p>
-                <button>Learn more</button>
+              <div className="nagata-content">
+                <h2>Smokey Nagata</h2>
+                <p>Smokey Nagata is a legendary figure in the world of automotive enthusiasts, particularly renowned for his daring exploits in high-speed driving and his iconic golden Toyota Supra. Born in Japan, Smokey Nagata became internationally famous for pushing the boundaries of speed and performance, capturing the imagination of enthusiasts worldwide.</p>
+                <p>One of the most notable aspects of Smokey Nagata&apos;s legacy is his fearless approach to high-speed driving, often on public roads and highways. His audacious runs, sometimes reaching speeds well beyond legal limits, earned him notoriety and a cult following among automotive enthusiasts. Nagata&apos;s ability to push both himself and his vehicles to the limit set him apart as a true pioneer of high-performance driving.</p>
+                <p>At the heart of Smokey Nagata&apos;s legend is his golden Toyota Supra, which became an iconic symbol of his audacity and technical prowess. This highly modified Supra was meticulously engineered and tuned to perfection, capable of reaching speeds exceeding 300 km/h. The golden Supra, adorned with striking visuals and powerful performance enhancements, stood as a testament to Nagata&apos;s relentless pursuit of speed and adrenaline.</p>
+                <p>Despite the controversy surrounding his high-speed runs, Smokey Nagata&apos;s influence on the automotive world is undeniable. He captured the imagination of enthusiasts with his daring feats and left an indelible mark on the culture of speed and performance. Even today, his legacy continues to inspire a new generation of automotive enthusiasts who admire his fearless approach to pushing the limits of what&apos;s possible on four wheels.</p>
               </div>
             </div>
-              {/* Second div */}
-              {/* Add more divs if needed */}
           </section>
         </div>
         {isScrollingDown && (

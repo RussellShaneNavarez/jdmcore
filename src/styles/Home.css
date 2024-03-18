@@ -112,28 +112,6 @@ header {
   animation-name: fadeInFromRight;
 }
 
-@keyframes fadeInFromLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes fadeInFromRight {
-  from {
-    opacity: 0;
-    transform: translateX(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
 .overview-section {
   display: flex;
   justify-content: center;
@@ -193,11 +171,91 @@ header {
   border: none;
   border-radius: 0.25rem;
   color: white;
+  cursor: pointer;
+}
+
+.scrollUpDiv button:hover {
+  transition: background-color 0.5s, color 0.5s;
+  background-color: #a60000; 
 }
 
 
 .nagata-container {
-  background: linear-gradient(to bottom, rgb(0, 0, 0), rgb(255, 215, 0))
+  background: linear-gradient(to bottom, #000000, #5c4c00, #000000);
+  width: 100%;
+  padding-bottom: 15rem;
+}
+
+.nagata-div {
+  width: 60%;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  margin-top: 10rem;
+}
+
+.nagata-img img {
+  width: 100%;
+  height: auto;
+  transition: filter 0.5s ease;
+}
+
+.nagata-div:hover .nagata-img {
+  filter: brightness(90%);
+}
+
+.nagata-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 3em;
+  box-sizing: border-box;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  overflow: hidden;
+}
+
+.nagata-div:hover .nagata-content {
+  opacity: 1;
+}
+
+.nagata-title h2 {
+  font-size: 5rem;
+  margin-top: 15rem;
+  margin-bottom: 15rem;
+}
+
+.nagata-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+@keyframes fadeInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 
