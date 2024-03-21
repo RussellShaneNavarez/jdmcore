@@ -19,6 +19,10 @@ const Cars = () => {
   const [selectedModel, setSelectedModel] = useState('');
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   // Effettua la lettura iniziale delle auto e dei preferiti dell'utente
   useEffect(() => {
     const fetchInitialData = async () => {

@@ -3,6 +3,7 @@ import { collection, addDoc } from 'firebase/firestore';
 import { useFirebaseContext } from '../providers/FirebaseProvider';
 import { Navbar } from '../components/Navbar';
 import '../styles/CarForm.css';
+import { useEffect } from 'react';
 
 function CarForm() {
   const { myFS } = useFirebaseContext(); // Utilizza il valore restituito da useFirebaseContext
@@ -20,6 +21,10 @@ function CarForm() {
     maxSpeed: 0,
     imgUrl: '' 
   });
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;

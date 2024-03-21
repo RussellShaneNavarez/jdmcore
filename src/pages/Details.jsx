@@ -13,6 +13,10 @@ const Details = ({ profile, userFavorites, setUserFavorites }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
+      }, []);
+
+    useEffect(() => {
         const fetchCar = async () => {
             try {
                 const detailsCarRef = doc(collection(myFS, 'Cars'), objectId);

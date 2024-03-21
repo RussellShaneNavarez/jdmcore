@@ -23,7 +23,10 @@ export const Home = () => {
   const [prevScrollY, setPrevScrollY] = useState(0);
 
   const scrollUp = useRef();
-  // const scrollDown = useRef();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -193,7 +196,7 @@ useEffect(() => {
         ) : (
           <div className='overlay-home'>
             <h1>Welcome to JDM Core</h1>
-            <p>Discover the thrill of JDM culture</p>
+            <p>Discover the thrill of JDM culture.</p>
           </div>
         )}
            </div>
@@ -222,50 +225,50 @@ useEffect(() => {
           <p>The most iconic sports car within the JDM Culture.</p>
           </div>
           
-          {/* First div */}
           <div className="nissan-div">
             <div className="nissan-img">
             <img src={r32} alt="Nissan GT-R" />
             </div>
-            <div className="content">
-              <h2>Nissan GT-R Series</h2>
-              <p>Information about Nissan R32</p>
-              <button>Learn More</button>
+            <div className="nissan-content">
+              <h2>Nissan R32</h2>
+              <p>Iconic for its dominance in motorsports, featuring advanced technology like the 
+                ATTESA E-TS AWD system and a potent RB26DETT engine.</p>
             </div>
           </div>
-          {/* Second div */}
+          
           <div className="nissan-div">
-            <div className="content">
-              <h2>Nissan GT-R Series</h2>
-              <p>Information about Nissan R33</p>
-              <button>Learn More</button>
+            <div className="nissan-content">
+              <h2>Nissan R33</h2>
+              <p>Improved aerodynamics and handling, powered by the RB26DETT engine, making it a 
+                formidable performer on road and track.</p>
             </div>
             <div className="nissan-img">
             <img src={r33} alt="Nissan GT-R" />
             </div>
           </div>
-          {/* Third div */}
+          
           <div className="nissan-div">
           <div className="nissan-img">
             <img src={r34} alt="Nissan GT-R" />
             </div>
-            <div className="content">
-              <h2>Nissan GT-R Series</h2>
-              <p>Information about Nissan R34</p>
-              <button>Learn More</button>
+            <div className="nissan-content">
+              <h2>Nissan R34</h2>
+              <p>Regarded as one of the greatest sports cars, featuring advanced technology like 
+                the Super-HICAS four-wheel steering system.</p>
             </div>
           </div>
-          {/* Fourth div */}
+  
           <div className="nissan-div">
-            <div className="content">
-              <h2>Nissan GT-R Series</h2>
-              <p>Information about Nissan R35</p>
-              <button>Learn More</button>
+            <div className="nissan-content">
+              <h2>Nissan R35</h2>
+              <p>Represents the pinnacle of performance engineering, featuring a twin-turbocharged 
+                VR38DETT engine and advanced ATTESA E-TS Pro AWD system.</p>
             </div>
             <div className="nissan-img">
             <img src={r35} alt="Nissan GT-R" />
             </div>
           </div>
+
         </section>
         <section className="nagata-container">
               <div className="nagata-title">
@@ -279,10 +282,15 @@ useEffect(() => {
                 </div>
               <div className="nagata-content">
                 <h2>Smokey Nagata</h2>
-                <p>Smokey Nagata is a legendary figure in the world of automotive enthusiasts, particularly renowned for his daring exploits in high-speed driving and his iconic golden Toyota Supra. Born in Japan, Smokey Nagata became internationally famous for pushing the boundaries of speed and performance, capturing the imagination of enthusiasts worldwide.</p>
-                <p>One of the most notable aspects of Smokey Nagata&apos;s legacy is his fearless approach to high-speed driving, often on public roads and highways. His audacious runs, sometimes reaching speeds well beyond legal limits, earned him notoriety and a cult following among automotive enthusiasts. Nagata&apos;s ability to push both himself and his vehicles to the limit set him apart as a true pioneer of high-performance driving.</p>
-                <p>At the heart of Smokey Nagata&apos;s legend is his golden Toyota Supra, which became an iconic symbol of his audacity and technical prowess. This highly modified Supra was meticulously engineered and tuned to perfection, capable of reaching speeds exceeding 300 km/h. The golden Supra, adorned with striking visuals and powerful performance enhancements, stood as a testament to Nagata&apos;s relentless pursuit of speed and adrenaline.</p>
-                <p>Despite the controversy surrounding his high-speed runs, Smokey Nagata&apos;s influence on the automotive world is undeniable. He captured the imagination of enthusiasts with his daring feats and left an indelible mark on the culture of speed and performance. Even today, his legacy continues to inspire a new generation of automotive enthusiasts who admire his fearless approach to pushing the limits of what&apos;s possible on four wheels.</p>
+                <p>
+                  Smokey Nagata, a Japanese automotive legend, gained worldwide fame for his fearless high-speed driving and his iconic 
+                  golden Toyota Supra. Renowned for pushing boundaries and reaching speeds far beyond legal limits, Nagata captured the 
+                  imagination of enthusiasts globally. His audacious runs on public roads, coupled with his technical prowess in modifying 
+                  and tuning vehicles, solidified his status as a pioneer of high-performance driving. The golden Supra, capable of speeds 
+                  over 300 km/h, became a symbol of Nagata&apos;s relentless pursuit of speed and adrenaline. Despite controversies, Nagata&apos;s 
+                  influence on automotive culture remains profound, inspiring a new generation of enthusiasts to push the limits of speed 
+                  and performance.
+                </p>
               </div>
             </div>
           </section>

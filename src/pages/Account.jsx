@@ -20,6 +20,10 @@ const Account = () => {
     const [showPasswordFields, setShowPasswordFields] = useState(false); 
 
     useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
+
+    useEffect(() => {
       const fetchDisplayName = async () => {
         if (profile) {
           const usersRef = collection(myFS, 'Users');

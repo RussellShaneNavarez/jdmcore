@@ -1,11 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useAuthContext } from '../providers/AuthProvider';
-// import { useFirebaseContext } from '../providers/FirebaseProvider';
-// import { collection, query, where, getDocs } from 'firebase/firestore';
 
 import '../styles/Navbar.css';
 
@@ -13,26 +11,7 @@ library.add(faBars); // Add icons to the library
 
 export const Navbar = () => {
   const { profile, logout } = useAuthContext();
-//  const { myFS } = useFirebaseContext();
-//  const [displayName, setDisplayName] = useState('');
   const allowedEmails = ["russellnavarez18@gmail.com", "christianmitra7@gmail.com", "jdmcore02@gmail.com"];
-
-  /*
-  useEffect(() => {
-    const fetchDisplayName = async () => {
-      if (profile) {
-        const usersRef = collection(myFS, 'Users');
-        const q = query(usersRef, where('uid', '==', profile.uid));
-        const querySnapshot = await getDocs(q);
-        querySnapshot.forEach((doc) => {
-          setDisplayName(doc.data().displayName);
-        });
-      }
-    };
-
-    fetchDisplayName();
-  }, [profile, myFS]);
-  */
 
   const handleLogout = async () => {
     try {
@@ -78,7 +57,7 @@ export const Navbar = () => {
           </Link>
         </div>
         <ul className='links'>
-          <li><Link to="/">Home</Link></li>
+          <li><NavLink to="/">Home</NavLink></li>
           <li><Link to="/cars">Cars</Link></li>
           <li><Link to="/about">About</Link></li>
           <li><Link to="/contacts">Contact</Link></li>

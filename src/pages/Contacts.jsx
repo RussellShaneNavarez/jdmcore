@@ -2,7 +2,7 @@ import { Navbar } from "../components/Navbar";
 import { Footer } from '../components/Footer';
 import '../styles/Contacts.css';
 import emailjs from '@emailjs/browser';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect  } from 'react';
 
 const Contacts = () => {
   const form = useRef();
@@ -10,6 +10,9 @@ const Contacts = () => {
   const [userEmail, setUserEmail] = useState('');
   const [message, setMessage] = useState('');
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   // Check regex email
   const emailValidation = () => {
