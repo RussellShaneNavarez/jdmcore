@@ -20,7 +20,7 @@
     z-index: -1; 
   }
 
-  .account-container button {
+  .account-content button {
     background-color: red;
     color: #fff;
     padding: 0.4em 1em; 
@@ -31,7 +31,7 @@
     transition: background-color 0.5s, color 0.5s;
   }
 
-  .account-container button:hover {
+  .account-content button:hover {
     background-color: #a60000; 
     color: #fff; 
   }
@@ -140,6 +140,19 @@
 
 .delete-logout p {
   margin: 0 1rem;
+}
+
+.scrollUpDiv button {
+  background-color: red;
+  border: none;
+  border-radius: 0.25rem;
+  color: white;
+  cursor: pointer;
+}
+
+.scrollUpDiv button:hover {
+  transition: background-color 0.5s, color 0.5s;
+  background-color: #a60000; 
 }
 
 @keyframes fade-in {

@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo, useRef } from 'react';
 import { useFirebaseContext } from '../providers/FirebaseProvider';
 import { collection, getDocs, updateDoc, doc, getDoc } from 'firebase/firestore';
 import { useAuthContext } from '../providers/AuthProvider';
@@ -18,6 +18,30 @@ const Cars = () => {
   const [selectedBrand, setSelectedBrand] = useState('');
   const [selectedModel, setSelectedModel] = useState('');
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
+
+  const [isScrollingDown, setIsScrollingDown] = useState(false);
+  const [prevScrollY, setPrevScrollY] = useState(0);
+
+  const scrollUp = useRef();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      setIsScrollingDown(currentScrollY > prevScrollY);
+      setPrevScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [prevScrollY]);
+
+  const scrollHandler = (elmRef) => {
+    console.log(elmRef.current);
+    window.scrollTo({ top: elmRef.current.offsetTop, behavior: "smooth" });
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -114,7 +138,7 @@ const Cars = () => {
   };
 
   return (
-    <div className="cars-container">
+    <div className="cars-container" ref={scrollUp}>
       <Navbar />
       <div className="cars-content">
 
@@ -167,6 +191,13 @@ const Cars = () => {
           )}
         </div>
       </div>
+      {isScrollingDown && (
+        <div className="scrollUpDiv">
+          <button onClick={() => scrollHandler(scrollUp)} className="scrollUp">
+            Scroll up
+          </button>
+        </div>
+      )}
       <Footer/>
     </div>
   );

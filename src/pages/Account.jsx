@@ -1,4 +1,4 @@
-import { useState, useEffect} from "react";
+import { useState, useEffect, useRef} from "react";
 import { Navbar } from "../components/Navbar";
 import { Footer } from '../components/Footer';
 import '../styles/Account.css';
@@ -18,6 +18,30 @@ const Account = () => {
     const [newPassword, setNewPassword] = useState('');
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
     const [showPasswordFields, setShowPasswordFields] = useState(false); 
+
+    const [isScrollingDown, setIsScrollingDown] = useState(false);
+  const [prevScrollY, setPrevScrollY] = useState(0);
+
+  const scrollUp = useRef();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      setIsScrollingDown(currentScrollY > prevScrollY);
+      setPrevScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [prevScrollY]);
+
+  const scrollHandler = (elmRef) => {
+    console.log(elmRef.current);
+    window.scrollTo({ top: elmRef.current.offsetTop, behavior: "smooth" });
+  };
 
     useEffect(() => {
       window.scrollTo(0, 0);
@@ -124,7 +148,7 @@ const Account = () => {
     
 
     return (
-      <div className="account-container">
+      <div className="account-container" ref={scrollUp}>
         <Navbar/>
         <div className="account-content">
           <h1>ACCOUNT</h1>
@@ -263,6 +287,13 @@ const Account = () => {
             <p>Version 1.0</p>
           </div>
         </div>
+        {isScrollingDown && (
+        <div className="scrollUpDiv">
+          <button onClick={() => scrollHandler(scrollUp)} className="scrollUp">
+            Scroll up
+          </button>
+        </div>
+      )}
         <Footer/>
       </div>
     );

@@ -10,6 +10,30 @@ const Contacts = () => {
   const [userEmail, setUserEmail] = useState('');
   const [message, setMessage] = useState('');
 
+  const [isScrollingDown, setIsScrollingDown] = useState(false);
+  const [prevScrollY, setPrevScrollY] = useState(0);
+
+  const scrollUp = useRef();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      setIsScrollingDown(currentScrollY > prevScrollY);
+      setPrevScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [prevScrollY]);
+
+  const scrollHandler = (elmRef) => {
+    console.log(elmRef.current);
+    window.scrollTo({ top: elmRef.current.offsetTop, behavior: "smooth" });
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -54,7 +78,7 @@ const Contacts = () => {
 
 
   return (
-    <div className="container-contacts">
+    <div className="container-contacts" ref={scrollUp}>
       <Navbar/>
       <div className="content-contacts">
         <div className="container-text">
@@ -85,6 +109,13 @@ const Contacts = () => {
         </form>
 
       </div>
+      {isScrollingDown && (
+        <div className="scrollUpDiv">
+          <button onClick={() => scrollHandler(scrollUp)} className="scrollUp">
+            Scroll up
+          </button>
+        </div>
+      )}
       <Footer/>
     </div>
   );

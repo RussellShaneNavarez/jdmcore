@@ -1,15 +1,39 @@
 import { Navbar } from "../components/Navbar";
 import { Footer } from '../components/Footer';
 import '../styles/About.css';
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const About = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  const [isScrollingDown, setIsScrollingDown] = useState(false);
+  const [prevScrollY, setPrevScrollY] = useState(0);
+
+  const scrollUp = useRef();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      setIsScrollingDown(currentScrollY > prevScrollY);
+      setPrevScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [prevScrollY]);
+
+  const scrollHandler = (elmRef) => {
+    console.log(elmRef.current);
+    window.scrollTo({ top: elmRef.current.offsetTop, behavior: "smooth" });
+  };
+
   return (
-    <div className="container-about">
+    <div className="container-about" ref={scrollUp}>
       <Navbar/>
       <div className="content-about">
         <div className="about-container">
@@ -53,6 +77,13 @@ const About = () => {
         </div>
         
       </div>
+      {isScrollingDown && (
+        <div className="scrollUpDiv">
+          <button onClick={() => scrollHandler(scrollUp)} className="scrollUp">
+            Scroll up
+          </button>
+        </div>
+      )}
       <Footer/>
     </div>
   );
